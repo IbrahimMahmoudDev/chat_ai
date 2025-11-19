@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/helper_function/on_generate_route.dart';
+import 'features/splash_view/presentation/views/splash_view.dart';
 
 void main() {
   runApp(const ChatBotApp());
@@ -8,12 +9,11 @@ void main() {
 
 class ChatBotApp extends StatelessWidget {
   const ChatBotApp({super.key});
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       onGenerateRoute: onGenerateRoute,
+      initialRoute: SplashView.routeName,
       debugShowCheckedModeBanner: false,
       title: 'ChatBotApp',
       theme: ThemeData(
