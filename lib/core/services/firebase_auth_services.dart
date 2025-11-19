@@ -21,19 +21,19 @@ class FirebaseAuthServices {
         'Exception in FirebaseAuthServices.createUserWithEmailAndPassword: ${e.toString()} and code ${e.code} ',
       );
       if (e.code == 'weak-password') {
-        throw CustomException(message: 'كلمة المرور ضعيفة جدًا.');
+        throw CustomException(message: 'The password is too weak.');
       } else if (e.code == 'email-already-in-use') {
-        throw CustomException(message: 'هذا البريد الإلكتروني مستخدم بالفعل.');
+        throw CustomException(message: 'This email is already in use.');
       } else if (e.code == 'network-request-failed') {
-        throw CustomException(message: 'تأكد من اتصالك بالانترنت');
+        throw CustomException(message: 'No internet connection. Please check your network and try again.');
       } else {
-        throw CustomException(message: 'حدث خطأ، من فضلك حاول مرة أخرى.');
+        throw CustomException(message: 'Failed to create account. Please try again later.');
       }
     } catch (e) {
       log(
         'Exception in FirebaseAuthServices.createUserWithEmailAndPassword: ${e.toString()} ',
       );
-      throw CustomException(message: 'حدث خطأ، من فضلك حاول مرة أخرى.');
+      throw CustomException(message: 'An unexpected error occurred. Please try again.');
     }
   }
 
@@ -53,24 +53,25 @@ class FirebaseAuthServices {
       );
       if (e.code == 'user-not-found') {
         throw CustomException(
-          message: 'لا يوجد مستخدم مسجل بهذا البريد الإلكتروني.',
+          message: 'No user found with this email.',
         );
       } else if (e.code == 'wrong-password') {
-        throw CustomException(message: 'كلمة المرور غير صحيحة.');
+        throw CustomException(message: 'Wrong password.');
       } else if (e.code == 'invalid-email') {
-        throw CustomException(message: 'صيغة البريد الإلكتروني غير صحيحة.');
+        throw CustomException(message: 'Invalid email format.');
       } else if (e.code == 'network-request-failed') {
-        throw CustomException(message: 'تأكد من اتصالك بالانترنت');
+        throw CustomException(message: 'No internet connection. Please check your network and try again.');
       } else {
-        throw CustomException(message: 'حدث خطأ، من فضلك حاول مرة أخرى.');
+        throw CustomException(message: 'Login failed. Please try again later.');
       }
     } catch (e) {
       log(
         'Exception in FirebaseAuthServices.signInWithEmailAndPassword: ${e.toString()} ',
       );
-      throw CustomException(message: 'حدث خطأ، من فضلك حاول مرة أخرى.');
+      throw CustomException(message: 'An unexpected error occurred. Please try again.');
     }
   }
+
 
 
 

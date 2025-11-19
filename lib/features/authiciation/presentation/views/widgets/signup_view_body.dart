@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../../../../core/utils/app_style_text.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/assets.dart';
+import 'custom_password_field.dart';
 import 'custom_text_form_filed.dart';
 
 class SignupViewBody extends StatefulWidget {
@@ -45,17 +46,25 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 hintText: 'Email',
               ),
               SizedBox(height: 24),
-              CustomTextFormFiled(
+              PasswordField(
                 onSaved: (value) {
                   password = value;
                 },
-                iconSuffix: Icon(Icons.visibility_off, color: Colors.grey),
-                textInputType: TextInputType.visiblePassword,
-                hintText: 'Password',
+
               ),
 
-              SizedBox(height: 100),
-              CustomButton(text: 'Sign up'),
+              SizedBox(height: 90),
+              CustomButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    formKey.currentState!.save();
+                  } else {
+                    autoValidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+                text: 'Sign up',
+              ),
 
               SizedBox(height: 15),
               Row(
