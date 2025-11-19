@@ -2,6 +2,7 @@ import 'package:chat_ai/core/utils/app_style_text.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/assets.dart';
+import '../../../../authiciation/presentation/views/login_view.dart';
 
 class OnBoardingViewBody extends StatelessWidget {
   const OnBoardingViewBody({super.key});
@@ -25,7 +26,7 @@ class OnBoardingViewBody extends StatelessWidget {
           Spacer(),
           CustomButton(
             onPressed: () {
-              // Handle button press
+            Navigator.pushNamed(context, LoginView.routeName);
             },
             text: 'Get Started',
           ),
