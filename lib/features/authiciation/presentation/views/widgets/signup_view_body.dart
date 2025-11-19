@@ -12,6 +12,7 @@ class SignupViewBody extends StatefulWidget {
 }
 
 class _SignupViewBodyState extends State<SignupViewBody> {
+  String? name, email, password;
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
@@ -27,18 +28,27 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               SizedBox(height: 50),
               Image.asset(Assets.imagesIconLogin),
               CustomTextFormFiled(
+                onSaved: (value) {
+                  name = value;
+                },
                 iconSuffix: Icon(Icons.person, color: Colors.grey),
                 textInputType: TextInputType.text,
                 hintText: 'Name',
               ),
               SizedBox(height: 24),
               CustomTextFormFiled(
+                onSaved: (value) {
+                  email = value;
+                },
                 iconSuffix: Icon(Icons.email, color: Colors.grey),
                 textInputType: TextInputType.emailAddress,
                 hintText: 'Email',
               ),
               SizedBox(height: 24),
               CustomTextFormFiled(
+                onSaved: (value) {
+                  password = value;
+                },
                 iconSuffix: Icon(Icons.visibility_off, color: Colors.grey),
                 textInputType: TextInputType.visiblePassword,
                 hintText: 'Password',

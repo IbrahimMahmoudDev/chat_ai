@@ -23,7 +23,7 @@ class CustomTextFormFiled extends StatelessWidget {
       onSaved: onSaved,
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'هذا الحقل مطلوب';
+          return 'all field required';
         } else {
           return null;
         }

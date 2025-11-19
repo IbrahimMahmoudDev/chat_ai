@@ -14,6 +14,8 @@ class LoginViewBody extends StatefulWidget {
 }
 
 class _LoginViewBodyState extends State<LoginViewBody> {
+
+  String ? email , password ;
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
@@ -30,17 +32,24 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               Image.asset(Assets.imagesIconLogin),
               SizedBox(height: 10),
               CustomTextFormFiled(
+                onSaved: (value) {
+                  email = value;
+                },
                 iconSuffix: Icon(Icons.email, color: Colors.grey),
                 textInputType: TextInputType.emailAddress,
                 hintText: 'Enter your email',
               ),
               SizedBox(height: 24),
               CustomTextFormFiled(
+                onSaved: (value) {
+                  password = value;
+                },
                 iconSuffix: Icon(Icons.visibility_off, color: Colors.grey),
                 textInputType: TextInputType.visiblePassword,
                 hintText: 'Password',
               ),
               const SizedBox(height: 10),
+
               Align(
                 alignment: Alignment.centerRight,
                 child: Text(
@@ -49,7 +58,20 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 ),
               ),
               SizedBox(height: 100),
-              CustomButton(text: 'Login'),
+              CustomButton(
+                  onPressed: (){
+                    if(formKey.currentState!.validate()){
+                      formKey.currentState!.save();
+                      print(email);
+                      print(password);
+                    }else {
+                      autoValidateMode = AutovalidateMode.always;
+                      setState(() {
+
+                      });
+                    }
+                  },
+                  text: 'Login'),
 
               SizedBox(height: 15),
               Row(
