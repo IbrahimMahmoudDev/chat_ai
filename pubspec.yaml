@@ -39,6 +39,7 @@ dependencies:
   dartz: ^0.10.1
   shared_preferences: ^2.5.3
   flutter_bloc: ^9.1.1
+  get_it: ^9.0.5
 
 dev_dependencies:
   flutter_test:
