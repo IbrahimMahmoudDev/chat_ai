@@ -12,7 +12,7 @@ class CustomHomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: Image.asset(Assets.imagesImageProfile),
+      // leading: Image.asset(Assets.imagesImageProfile),
       title: Text(
         "!.. ${getGreeting()}",
         style: AppTextStyles.semibold16.copyWith(color: Color(0xFFA8AFB0)),
