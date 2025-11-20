@@ -1,7 +1,5 @@
-import 'dart:convert';
 import '../../features/authiciation/data/models/user_model.dart';
 import '../../features/authiciation/domain/entites/user_entity.dart';
-import '../services/backend_point.dart';
 import '../services/shared_prefrence_singleton.dart';
 
 

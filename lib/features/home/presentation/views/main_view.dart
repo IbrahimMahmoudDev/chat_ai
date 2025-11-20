@@ -1,3 +1,4 @@
+import 'package:chat_ai/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:chat_ai/features/home/presentation/views/widgets/main_view_body.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,11 @@ static const String routeName = 'main_view';
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+
+        backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
-        title: const Text('Welcome Ibrahim'),
+        // backgroundColor: Colors.transparent,
+        title: const CustomHomeAppBar()
       ),
       body: MainViewBody(),
     );
