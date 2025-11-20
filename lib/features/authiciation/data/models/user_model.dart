@@ -15,7 +15,7 @@ class UserModel extends UserEntity {
       name: user.displayName ?? '',
       email: user.email ?? '',
       uId: user.uid,
-      password: null,
+      password: '',
     );
   }
 
@@ -24,7 +24,7 @@ class UserModel extends UserEntity {
       name: json['name'] ?? '',
       email: json['email'] ?? '',
       uId: json['uId'] ?? '',
-      password: json['password'],
+      password: json['password'] ?? '',
     );
   }
 
@@ -34,11 +34,11 @@ class UserModel extends UserEntity {
       name: user.name,
       email: user.email,
       uId: user.uId,
-      password: '',
+      password:user.password ?? '',
     );
   }
 
   toMap() {
-    return {'name': name, 'email': email, 'uId': uId};
+    return {'name': name, 'email': email, 'uId': uId,};
   }
 }
