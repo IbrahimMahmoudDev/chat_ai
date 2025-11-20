@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../../domain/entites/user_entity.dart';
 import '../../../../domain/repo/auth_repo.dart';
-
-
 part 'signup_state.dart';
 
 class SignupCubit extends Cubit<SignupState> {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/utils/app_style_text.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/assets.dart';
+import '../../manager/cubits/signup_cubit/signup_cubit.dart';
 import 'custom_password_field.dart';
 import 'custom_text_form_filed.dart';
 
@@ -13,7 +15,7 @@ class SignupViewBody extends StatefulWidget {
 }
 
 class _SignupViewBodyState extends State<SignupViewBody> {
-  String? name, email, password;
+  late String name, email, password;
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
@@ -30,7 +32,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               Image.asset(Assets.imagesIconLogin),
               CustomTextFormFiled(
                 onSaved: (value) {
-                  name = value;
+                  name = value!;
                 },
                 iconSuffix: Icon(Icons.person, color: Colors.grey),
                 textInputType: TextInputType.text,
@@ -39,7 +41,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               SizedBox(height: 24),
               CustomTextFormFiled(
                 onSaved: (value) {
-                  email = value;
+                  email = value!;
                 },
                 iconSuffix: Icon(Icons.email, color: Colors.grey),
                 textInputType: TextInputType.emailAddress,
@@ -48,9 +50,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
               SizedBox(height: 24),
               PasswordField(
                 onSaved: (value) {
-                  password = value;
+                  password = value!;
                 },
-
               ),
 
               SizedBox(height: 90),
@@ -58,6 +59,11 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
+                    context.read<SignupCubit>().createUserWithEmailAndPassword(
+                      email,
+                      password,
+                      name,
+                    );
                   } else {
                     autoValidateMode = AutovalidateMode.always;
                     setState(() {});

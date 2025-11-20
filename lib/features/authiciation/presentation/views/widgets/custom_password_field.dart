@@ -26,8 +26,8 @@ class _PasswordFieldState extends State<PasswordField> {
           });
         },
         child: obscureText
-            ? Icon(Icons.visibility, color: Color(0xFFCBD0D1))
-            : Icon(Icons.visibility_off, color: Color(0xFFCBD0D1)),
+            ? Icon(Icons.visibility, color: Colors.grey)
+            : Icon(Icons.visibility_off, color: Colors.grey),
       ),
     );
   }

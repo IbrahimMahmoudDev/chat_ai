@@ -2,8 +2,10 @@ import 'package:chat_ai/core/utils/app_style_text.dart';
 import 'package:chat_ai/core/widgets/custom_button.dart';
 import 'package:chat_ai/features/authiciation/presentation/views/widgets/custom_text_form_filed.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../generated/assets.dart';
+import '../../manager/cubits/signin_cubit/sign_in_cubit.dart';
 import '../signup_view.dart';
 import 'custom_password_field.dart';
 
@@ -16,7 +18,7 @@ class LoginViewBody extends StatefulWidget {
 
 class _LoginViewBodyState extends State<LoginViewBody> {
 
-  String ? email , password ;
+ late String  email , password ;
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
@@ -34,7 +36,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               SizedBox(height: 10),
               CustomTextFormFiled(
                 onSaved: (value) {
-                  email = value;
+                  email = value!;
                 },
                 iconSuffix: Icon(Icons.email, color: Colors.grey),
                 textInputType: TextInputType.emailAddress,
@@ -43,7 +45,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
               SizedBox(height: 24),
               PasswordField(
                 onSaved: (value) {
-                  password = value;
+                  password = value!;
                 },
 
               ),
@@ -61,8 +63,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   onPressed: (){
                     if(formKey.currentState!.validate()){
                       formKey.currentState!.save();
-                      print(email);
-                      print(password);
+                      context.read<SignInCubit>().signInWithEmailAndPassword(email, password);
                     }else {
                       autoValidateMode = AutovalidateMode.always;
                       setState(() {
