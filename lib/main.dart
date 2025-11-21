@@ -3,7 +3,6 @@ import 'package:chat_ai/simple_block_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'core/helper_function/on_generate_route.dart';
 import 'core/services/shared_prefrence_singleton.dart';
 import 'features/splash_view/presentation/views/splash_view.dart';

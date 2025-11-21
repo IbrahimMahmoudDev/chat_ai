@@ -43,6 +43,8 @@ dependencies:
   cloud_firestore: ^6.1.0
   modal_progress_hud_nsn: ^0.5.1
   flutter_easyloading: ^3.0.5
+  http: ^1.6.0
+  markdown: ^7.3.0
 
 dev_dependencies:
   flutter_test:

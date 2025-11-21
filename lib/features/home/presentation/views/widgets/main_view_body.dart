@@ -16,30 +16,55 @@ class MainViewBody extends StatelessWidget {
   }
 }
 
-class TextFormFieldChat extends StatelessWidget {
+class TextFormFieldChat extends StatefulWidget {
   const TextFormFieldChat({super.key, this.onFieldSubmitted});
-final void Function(String)? onFieldSubmitted;
+  final void Function(String)? onFieldSubmitted;
+
+  @override
+  State<TextFormFieldChat> createState() => _TextFormFieldChatState();
+}
+
+class _TextFormFieldChatState extends State<TextFormFieldChat> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(() {
+      setState(() {}); // تحديث الواجهة عند تغيّر النص
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final bool hasText = controller.text.isNotEmpty;
+
     return Padding(
       padding: const EdgeInsets.all(16),
       child: TextFormField(
-        onFieldSubmitted: onFieldSubmitted,
+        controller: controller,
+        onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(14)
+            borderRadius: BorderRadius.circular(14),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
-            borderSide: BorderSide(color: Colors.teal)
+            borderSide: const BorderSide(color: Colors.teal),
           ),
-
           hintText: 'Ask me anything...',
           hintStyle: AppTextStyles.regular16,
-          prefixIcon: Icon(Icons.add_circle_outline_outlined,color: Colors.grey.shade600,),
-          suffixIcon: Icon(Icons.arrow_circle_up_outlined,size: 25,color: Colors.grey.shade600,),
 
+          prefixIcon: Icon(
+            Icons.emoji_emotions_outlined,
+            color: Colors.grey.shade600,
+          ),
 
+          suffixIcon: Icon(
+            Icons.send_outlined,
+            size: 25,
+            color: hasText ? Colors.black : Colors.grey.shade600,
+          ),
         ),
       ),
     );
