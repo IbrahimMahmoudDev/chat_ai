@@ -15,6 +15,7 @@ class ChatCubit extends Cubit<ChatState> {
   Future<void> sendMessage(String text) async {
     // 1) Add user message
     final userMsg = ChatMessage(text: text, isUser: true);
+    print("User message added: $text");
     emit(state.copyWith(messages: [...state.messages, userMsg], isLoading: true));
 
     // 2) Prepare AI message
@@ -24,6 +25,7 @@ class ChatCubit extends Cubit<ChatState> {
     // 3) Streaming from AI
     await for (var chunk in repo.grokStream(text)) {
       aiMsg.text += chunk;
+      print("AI typing: $aiMsg");
 
       emit(
         state.copyWith(messages: [...state.messages]),
