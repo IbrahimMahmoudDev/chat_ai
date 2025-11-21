@@ -8,7 +8,7 @@ import 'core/helper_function/on_generate_route.dart';
 import 'core/services/shared_prefrence_singleton.dart';
 import 'firebase_options.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,

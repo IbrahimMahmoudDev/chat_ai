@@ -45,6 +45,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   http: ^1.6.0
   markdown: ^7.3.0
+  flutter_dotenv: ^6.0.0
 
 dev_dependencies:
   flutter_test:
