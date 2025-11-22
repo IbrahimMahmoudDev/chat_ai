@@ -8,8 +8,9 @@ class OnBoardView extends StatelessWidget {
 static const String routeName = 'on_boarding_view';
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: theme.scaffoldBackgroundColor,
       body: OnBoardingViewBody(),
     );
   }

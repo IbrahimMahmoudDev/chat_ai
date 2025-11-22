@@ -26,7 +26,7 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
   @override
   void dispose() {
     if (widget.controller == null) {
-      // امسح الـ controller الداخلي فقط لو هو داخلي
+
       controller.dispose();
     }
     super.dispose();
@@ -35,31 +35,33 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
   @override
   Widget build(BuildContext context) {
     final bool hasText = controller.text.isNotEmpty;
-
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(16),
       child: TextFormField(
         controller: controller,
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
+          filled: true,
+          fillColor: theme.inputDecorationTheme.fillColor,
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
             borderSide: const BorderSide(color: Colors.teal),
           ),
           hintText: 'Ask me anything...',
-          hintStyle: AppTextStyles.regular16,
+          hintStyle: AppTextStyles.regular16.copyWith(color: theme.hintColor),
 
           prefixIcon: Icon(
             Icons.emoji_emotions_outlined,
-            color: Colors.grey.shade600,
+            color: theme.iconTheme.color,
           ),
 
-          suffixIcon: Icon(
-            Icons.send,
-            size: 25,
-            color: hasText ? Colors.black : Colors.grey,
-          ),
+            suffixIcon: Icon(
+              Icons.send,
+              size: 25,
+              color: hasText ? theme.iconTheme.color : theme.disabledColor,
+            ),
         ),
       ),
     );

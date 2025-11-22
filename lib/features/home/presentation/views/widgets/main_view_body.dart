@@ -1,9 +1,9 @@
-import 'package:chat_ai/features/home/presentation/chat_cubit/chat_cubit.dart';
 import 'package:chat_ai/features/home/presentation/views/widgets/text_form_field_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../manager/chat_cubit/chat_cubit.dart';
 import 'ai_typing_indicator.dart';
-import 'chat_message_bubble.dart';
+import 'chat_message_list_view.dart';
 
 class MainViewBody extends StatefulWidget {
   const MainViewBody({super.key});
@@ -36,18 +36,9 @@ class _MainViewBodyState extends State<MainViewBody> {
               return Column(
                 children: [
                   Expanded(
-                    child: ListView.builder(
-                      physics: BouncingScrollPhysics(),
+                    child: ChatMessagesListView(
                       controller: scrollController,
-                      padding: EdgeInsets.all(16),
-                      itemCount: state.messages.length,
-                      itemBuilder: (context, index) {
-                        final msg = state.messages[index];
-                        return ChatMessageBubble(
-                          text: msg.text,
-                          isUser: msg.isUser,
-                        );
-                      },
+                      messages: state.messages,
                     ),
                   ),
 

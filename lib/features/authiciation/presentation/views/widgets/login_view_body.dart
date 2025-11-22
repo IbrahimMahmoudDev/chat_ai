@@ -23,6 +23,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),

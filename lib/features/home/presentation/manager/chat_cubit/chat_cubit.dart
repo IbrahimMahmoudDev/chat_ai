@@ -1,8 +1,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../data/models/chat_message.dart';
-import '../../domain/chat_repo.dart';
+
+import '../../../data/models/chat_message.dart';
+import '../../../domain/chat_repo.dart';
+
 
 part 'chat_state.dart';
 

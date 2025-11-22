@@ -1,6 +1,7 @@
 import 'package:chat_ai/core/widgets/custom_progress_hud.dart';
 import 'package:chat_ai/features/authiciation/presentation/views/widgets/show_snack_bar.dart';
 import 'package:chat_ai/features/authiciation/presentation/views/widgets/signup_view_body.dart';
+import 'package:chat_ai/features/authiciation/presentation/views/widgets/signup_view_body_bloc_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -16,41 +17,18 @@ class SignupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BlocProvider(
       create: (context) =>
           SignupCubit(
             getIt.get<AuthRepo>(),
           ),
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: theme.scaffoldBackgroundColor,
         body: SignupViewBodyBlocConsumer(),
       ),
     );
   }
 }
 
-class SignupViewBodyBlocConsumer extends StatelessWidget {
-  const SignupViewBodyBlocConsumer({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return BlocConsumer<SignupCubit, SignupState>(
-      listener: (context, state) {
-       if (state is SignupSuccess) {
-         Navigator.pushNamed(context, LoginView.routeName);
-         showSnackBar(context, 'Signed up successfully',Colors.green);
-       }
-       if (state is SignupFailure) {
-         showSnackBar(context, state.errorMessage,Colors.red);
-       }
-      },
-      builder: (context, state) {
-        return CustomProgressHud(
-            isLoading: state is SignupLoading ? true : false,
-            child: SignupViewBody());
-      },
-    );
-  }
-}

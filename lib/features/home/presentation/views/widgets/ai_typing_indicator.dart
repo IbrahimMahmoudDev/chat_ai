@@ -5,13 +5,14 @@ class AiTypingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Row(
       children: [
         SizedBox(width: 12),
         Container(
           padding: EdgeInsets.symmetric(horizontal: 14, vertical: 10),
           decoration: BoxDecoration(
-            color: Colors.grey[300],
+    color: theme.colorScheme.secondary.withOpacity(0.2),
             borderRadius: BorderRadius.circular(14),
           ),
           child: Row(
@@ -34,10 +35,7 @@ class AiTypingIndicator extends StatelessWidget {
       duration: Duration(milliseconds: 700),
       curve: Curves.easeInOut,
       builder: (context, value, child) {
-        return Opacity(
-          opacity: value,
-          child: child,
-        );
+        return Opacity(opacity: value, child: child);
       },
       onEnd: () {},
       child: Container(

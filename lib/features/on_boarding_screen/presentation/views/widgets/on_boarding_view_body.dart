@@ -9,6 +9,7 @@ class OnBoardingViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -16,12 +17,13 @@ class OnBoardingViewBody extends StatelessWidget {
         children: [
           Spacer(),
           Image.asset(Assets.imagesSplashImages),
-          Text('Chat with AI Anytime, Anywhere', style: AppTextStyles.bold19),
+          SizedBox(height: 10),
+          Text('Chat with AI Anytime, Anywhere', style:theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
           SizedBox(height: 10),
           Text(
             'Instant,smart answers powered by advanced artificial intelligence',
             textAlign: TextAlign.center,
-            style: AppTextStyles.regular16.copyWith(color: Color(0xFFA3A3A3)),
+            style: theme.textTheme.titleSmall?.copyWith(color: theme.hintColor),
           ),
           Spacer(),
           CustomButton(

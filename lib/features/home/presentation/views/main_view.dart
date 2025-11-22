@@ -1,5 +1,4 @@
 import 'package:chat_ai/core/services/git_it_services.dart';
-import 'package:chat_ai/features/home/presentation/chat_cubit/chat_cubit.dart';
 import 'package:chat_ai/features/home/presentation/views/widgets/custom_drawer_widget.dart';
 import 'package:chat_ai/features/home/presentation/views/widgets/custom_home_app_bar.dart';
 import 'package:chat_ai/features/home/presentation/views/widgets/main_view_body.dart';
@@ -7,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../domain/chat_repo.dart';
+import '../manager/chat_cubit/chat_cubit.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});
@@ -19,9 +19,9 @@ class MainView extends StatelessWidget {
       create: (context) => ChatCubit(getIt<ChatRepo>()),
       child: Scaffold(
         drawer: CustomDrawerWidget(),
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
-          backgroundColor: Colors.white,
+          backgroundColor: AppBarTheme.of(context).backgroundColor,
           title: const CustomHomeAppBar(),
         ),
         body: MainViewBody(),

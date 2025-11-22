@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../../../../../core/utils/app_style_text.dart';
 
-
 class CustomTextFormFiled extends StatelessWidget {
   const CustomTextFormFiled({
     super.key,
     required this.textInputType,
     this.iconSuffix,
     required this.hintText,
-    this.onSaved,  this.obscureText  =false,
+    this.onSaved,
+    this.obscureText = false,
   });
   final TextInputType textInputType;
   final Widget? iconSuffix;
@@ -18,8 +18,9 @@ class CustomTextFormFiled extends StatelessWidget {
   final bool obscureText;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return TextFormField(
-      obscureText:obscureText ,
+      obscureText: obscureText,
       onSaved: onSaved,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -30,25 +31,22 @@ class CustomTextFormFiled extends StatelessWidget {
       },
       keyboardType: textInputType,
       decoration: InputDecoration(
-
         filled: true,
         suffixIcon: iconSuffix,
         hintText: hintText,
-        hintStyle: AppTextStyles.semibold14.copyWith(
-          color: Color(0xFF9DA5A6),
-        ),
-        fillColor: Color(0xFFF9FAFA),
-        border: buildOutlineInputBorder(),
-        enabledBorder: buildOutlineInputBorder(),
-        focusedBorder: buildOutlineInputBorder(),
+        hintStyle: AppTextStyles.semibold14.copyWith(color: theme.hintColor),
+        fillColor: theme.inputDecorationTheme.fillColor,
+        border: buildOutlineInputBorder(theme),
+        enabledBorder: buildOutlineInputBorder(theme),
+        focusedBorder: buildOutlineInputBorder(theme),
       ),
     );
   }
 
-  OutlineInputBorder buildOutlineInputBorder() {
+  OutlineInputBorder buildOutlineInputBorder(ThemeData theme) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(8),
-      borderSide: BorderSide(color: Color(0xFFEBEDED)),
+      borderSide: BorderSide(color: theme.dividerColor),
     );
   }
 }

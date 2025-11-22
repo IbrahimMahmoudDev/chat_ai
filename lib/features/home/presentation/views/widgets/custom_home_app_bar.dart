@@ -1,4 +1,3 @@
-import 'package:chat_ai/core/widgets/notification_widget.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/helper_function/get_greeting.dart';
 import '../../../../../core/helper_function/get_user.dart';
@@ -11,19 +10,18 @@ class CustomHomeAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return ListTile(
       // leading: Image.asset(Assets.imagesImageProfile),
       title: Text(
         "!.. ${getGreeting()}",
-        style: AppTextStyles.semibold16.copyWith(color: Color(0xFFA8AFB0)),
+        style: AppTextStyles.semibold16.copyWith(color: theme.textTheme.bodySmall?.color,),
       ),
       subtitle: Text(
         getUser().name,
-        style: AppTextStyles.bold16.copyWith(color: Color(0xFF121313)),
+        style: AppTextStyles.bold16.copyWith(color: theme.textTheme.headlineMedium?.color),
       ),
-      trailing: NotificationWidget()
+      trailing: Image.asset(Assets.imagesImageProfile),
     );
   }
 }
-
-
