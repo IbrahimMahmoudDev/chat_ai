@@ -16,12 +16,12 @@ class OnBoardingViewBody extends StatelessWidget {
         children: [
           Spacer(),
           Image.asset(Assets.imagesSplashImages),
-          Text('Chat with AI Anytime, Anywhere', style: AppTextStyles.bold20),
+          Text('Chat with AI Anytime, Anywhere', style: AppTextStyles.bold19),
           SizedBox(height: 10),
           Text(
             'Instant,smart answers powered by advanced artificial intelligence',
             textAlign: TextAlign.center,
-            style: AppTextStyles.regular16,
+            style: AppTextStyles.regular16.copyWith(color: Color(0xFFA3A3A3)),
           ),
           Spacer(),
           CustomButton(
