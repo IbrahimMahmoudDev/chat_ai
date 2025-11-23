@@ -24,6 +24,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -33,8 +34,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           child: Column(
             children: [
               SizedBox(height: 80),
-              Image.asset(Assets.imagesIconLogin),
-              SizedBox(height: 10),
+              Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
+              SizedBox(height: 15),
               CustomTextFormFiled(
                 onSaved: (value) {
                   email = value!;

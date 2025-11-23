@@ -1,5 +1,15 @@
+import 'package:hive/hive.dart';
+part 'chat_message.g.dart';
+@HiveType(typeId: 1)
 class ChatMessage {
-    String text;
+  @HiveField(0)
+  String text;
+
+  @HiveField(1)
   final bool isUser;
-  ChatMessage({required this.text, required this.isUser});
+
+  ChatMessage({
+    required this.text,
+    required this.isUser,
+  });
 }

@@ -20,6 +20,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -29,7 +31,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
           child: Column(
             children: [
               SizedBox(height: 50),
-              Image.asset(Assets.imagesIconLogin),
+            Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
+              SizedBox(height: 15),
               CustomTextFormFiled(
                 onSaved: (value) {
                   name = value!;

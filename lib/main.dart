@@ -4,9 +4,12 @@ import 'package:chat_ai/simple_block_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'core/helper_function/on_generate_route.dart';
 import 'core/services/shared_prefrence_singleton.dart';
 import 'core/utils/app_theme.dart';
+import 'features/home/data/models/chat_message.dart';
+import 'features/home/data/models/chat_model.dart';
 import 'features/home/presentation/manager/theme_cubit/theme_cubit.dart';
 import 'firebase_options.dart';
 
@@ -15,6 +18,12 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await Hive.initFlutter();
+
+  Hive.registerAdapter(ChatMessageAdapter());
+  Hive.registerAdapter(ChatModelAdapter());
+
+  await Hive.openBox<ChatModel>('chats');
   Bloc.observer = SimpleBlocObserver();
   await Prefs.init();
   setupServices();
