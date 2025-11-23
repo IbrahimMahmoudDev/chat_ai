@@ -39,7 +39,7 @@ class _MainViewBodyState extends State<MainViewBody> {
               });
               if (state.currentChat == null || state.currentChat!.messages.isEmpty) {
                 return  Center(
-                  child: Text(" Start a New Chat Conversation",style: TextStyle(
+                  child: Text(" Create a New Chat Conversation",style: TextStyle(
                     fontSize: theme.textTheme.bodyLarge?.fontSize,
                     color: isDark ? Colors.white : Colors.black,
                   ),),

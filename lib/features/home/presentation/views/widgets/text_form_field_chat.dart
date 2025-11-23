@@ -47,7 +47,7 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
-            borderSide: const BorderSide(color: Colors.teal),
+
           ),
           hintText: 'Ask me anything...',
           hintStyle: AppTextStyles.regular16.copyWith(color: theme.hintColor),

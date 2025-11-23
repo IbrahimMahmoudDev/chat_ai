@@ -10,7 +10,6 @@ class ChatMessageBubble extends StatelessWidget {
   final bool isUser;
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     final userColor = isDark ? Colors.blue[700] : Colors.blue[400];

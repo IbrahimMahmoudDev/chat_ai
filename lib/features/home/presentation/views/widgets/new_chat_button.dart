@@ -27,7 +27,7 @@ class NewChatButton extends StatelessWidget {
           color: isDark ? Colors.white : Colors.black,
         ),),
         style: ElevatedButton.styleFrom(
-          backgroundColor: isDark ? Colors.black.withOpacity(1) : Colors.teal[50],
+          backgroundColor: isDark ? Colors.black.withOpacity(1) : Colors.teal[100],
           minimumSize: const Size(double.infinity, 50),
         ),
       ),

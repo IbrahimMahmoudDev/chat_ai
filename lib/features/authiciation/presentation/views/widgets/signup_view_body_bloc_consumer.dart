@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/widgets/custom_progress_hud.dart';
+import '../../../../on_boarding_screen/presentation/views/on_board_view.dart';
 import '../../manager/cubits/signup_cubit/signup_cubit.dart';
 import '../login_view.dart';
 
@@ -18,8 +19,8 @@ class SignupViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignupCubit, SignupState>(
       listener: (context, state) {
         if (state is SignupSuccess) {
-          Navigator.pushNamed(context, LoginView.routeName);
-          showSnackBar(context, 'Signed up successfully',theme.primaryColor);
+          Navigator.pushNamed(context, OnBoardView.routeName);
+          showSnackBar(context, 'Signed up successfully',Colors.white);
         }
         if (state is SignupFailure) {
           showSnackBar(context, state.errorMessage,Colors.red);

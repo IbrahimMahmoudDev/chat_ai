@@ -1,16 +1,10 @@
+import 'package:chat_ai/features/home/presentation/views/main_view.dart';
 import 'package:flutter/material.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/assets.dart';
-import '../../../../authiciation/presentation/views/login_view.dart';
 
-class OnBoardingViewBody extends StatefulWidget {
+class OnBoardingViewBody extends StatelessWidget {
   const OnBoardingViewBody({super.key});
-
-  @override
-  State<OnBoardingViewBody> createState() => _OnBoardingViewBodyState();
-}
-
-class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +17,8 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
         children: [
           Spacer(),
           Image.asset(isDark ? Assets.imagesSplashImageDark : Assets.imagesSplashImages),
-          SizedBox(height: 10),
-          Text('Chat with AI Anytime, Anywhere', style:theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+          SizedBox(height: 30),
+          Text('Chat with AI Anytime Anywhere', style:theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
           SizedBox(height: 10),
           Text(
             'Instant,smart answers powered by advanced artificial intelligence',
@@ -33,11 +27,11 @@ class _OnBoardingViewBodyState extends State<OnBoardingViewBody> {
           ),
           Spacer(),
           CustomButton(
-            onPressed: () {
-            Navigator.pushNamed(context, LoginView.routeName);
-            },
+            targetPage: const MainView(),
+
             text: 'Get Started',
           ),
+
           SizedBox(height: 50),
         ],
       ),

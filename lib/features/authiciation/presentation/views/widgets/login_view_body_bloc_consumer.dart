@@ -1,4 +1,5 @@
 import 'package:chat_ai/features/authiciation/presentation/views/widgets/show_snack_bar.dart';
+import 'package:chat_ai/features/on_boarding_screen/presentation/views/on_board_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -17,8 +18,8 @@ class LoginViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInSuccess) {
-          Navigator.pushNamed(context, MainView.routeName);
-          showSnackBar(context, 'Signed in successfully', theme.primaryColor);
+          Navigator.pushNamed(context, OnBoardView.routeName);
+          showSnackBar(context, 'Signed in successfully',Colors.green);
         }
         if (state is SignInFailure) {
           showSnackBar(context, state.errorMessage, Colors.red);
