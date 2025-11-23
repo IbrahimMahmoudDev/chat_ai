@@ -5,6 +5,7 @@ import 'package:chat_ai/features/home/presentation/views/widgets/main_view_body.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/services/chat_services.dart';
 import '../../domain/chat_repo.dart';
 import '../manager/chat_cubit/chat_cubit.dart';
 
@@ -16,7 +17,7 @@ class MainView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ChatCubit(getIt<ChatRepo>()),
+      create: (context) => ChatCubit(chatService: getIt<ChatService>(), repo: getIt<ChatRepo>()),
       child: Scaffold(
         drawer: CustomDrawerWidget(),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,

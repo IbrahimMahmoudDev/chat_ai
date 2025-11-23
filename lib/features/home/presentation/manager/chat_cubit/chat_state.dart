@@ -2,14 +2,20 @@ part of 'chat_cubit.dart';
 
 @immutable
 class ChatState {
-  final List<ChatMessage> messages;
+  final ChatModel? currentChat;
   final bool isLoading;
 
-  const ChatState({required this.messages, required this.isLoading});
+  const ChatState({
+    this.currentChat,
+    required this.isLoading,
+  });
 
-  ChatState copyWith({List<ChatMessage>? messages, bool? isLoading}) {
+  ChatState copyWith({
+    ChatModel? currentChat,
+    bool? isLoading,
+  }) {
     return ChatState(
-      messages: messages ?? this.messages,
+      currentChat: currentChat ?? this.currentChat,
       isLoading: isLoading ?? this.isLoading,
     );
   }

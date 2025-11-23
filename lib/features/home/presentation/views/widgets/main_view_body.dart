@@ -38,7 +38,7 @@ class _MainViewBodyState extends State<MainViewBody> {
                   Expanded(
                     child: ChatMessagesListView(
                       controller: scrollController,
-                      messages: state.messages,
+                      messages:state.currentChat?.messages ?? [],
                     ),
                   ),
 

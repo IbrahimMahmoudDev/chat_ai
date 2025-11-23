@@ -4,6 +4,7 @@ import '../../features/authiciation/domain/repo/auth_repo.dart';
 import '../../features/home/data/repos/chat_repo_impl.dart';
 import '../../features/home/domain/chat_repo.dart';
 import '../../secrets.dart';
+import 'chat_services.dart';
 import 'firebase_auth_services.dart';
 
 final getIt = GetIt.instance;
@@ -20,4 +21,6 @@ void setupServices() {
       Secrets.groqApiKey,
     ),
   );
+
+  getIt.registerSingleton<ChatService>(ChatService());
 }
