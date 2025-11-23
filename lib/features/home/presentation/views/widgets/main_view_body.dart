@@ -33,6 +33,15 @@ class _MainViewBodyState extends State<MainViewBody> {
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 scrollToBottom();
               });
+
+              if (state.currentChat == null) {
+                return const Center(
+                  child: Text(
+                    "create New Chat ",
+                    style: TextStyle(fontSize: 16),
+                  ),
+                );
+              }
               return Column(
                 children: [
                   Expanded(

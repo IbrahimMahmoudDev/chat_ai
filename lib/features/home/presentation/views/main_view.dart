@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/chat_services.dart';
 import '../../domain/chat_repo.dart';
+import '../manager/ConversationsCubit/conversations_cubit.dart';
 import '../manager/chat_cubit/chat_cubit.dart';
 
 class MainView extends StatelessWidget {
@@ -16,8 +17,18 @@ class MainView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => ChatCubit(chatService: getIt<ChatService>(), repo: getIt<ChatRepo>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => ConversationsCubit(getIt<ChatService>()),
+        ),
+        BlocProvider(
+          create: (context) => ChatCubit(
+            chatService: getIt<ChatService>(),
+            repo: getIt<ChatRepo>(),
+          ),
+        ),
+      ],
       child: Scaffold(
         drawer: CustomDrawerWidget(),
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
@@ -30,5 +41,3 @@ class MainView extends StatelessWidget {
     );
   }
 }
-
-

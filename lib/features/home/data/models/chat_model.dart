@@ -19,4 +19,16 @@ class ChatModel {
     required this.title,
     required this.messages,
   });
+  ChatModel copyWith({
+    String? id,
+    String? title,
+    List<ChatMessage>? messages,
+  }) {
+    return ChatModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      messages: messages ?? this.messages,
+    );
+  }
+
 }

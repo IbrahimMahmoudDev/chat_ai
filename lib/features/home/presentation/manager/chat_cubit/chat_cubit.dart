@@ -21,7 +21,11 @@ class ChatCubit extends Cubit<ChatState> {
   void loadChat(String chatId) {
     final chat = chatService.getChat(chatId);
     emit(state.copyWith(currentChat: chat));
+
+    // خزّن آخر محادثة مفتوحة
+    chatService.lastOpenedChatId = chatId;
   }
+
 
   // إرسال رسالة المستخدم + AI
   Future<void> sendMessage(String text) async {
@@ -29,49 +33,75 @@ class ChatCubit extends Cubit<ChatState> {
 
     emit(state.copyWith(isLoading: true));
 
-    // رسالة المستخدم
+    // 1. رسالة المستخدم
     final userMsg = ChatMessage(text: text, isUser: true);
     chatService.addMessage(state.currentChat!.id, userMsg);
 
-    var updatedChat = chatService.getChat(state.currentChat!.id);
-    emit(state.copyWith(currentChat: updatedChat));
-
-    // رسالة AI جديدة
+    // 2. رسالة AI فارغة في البداية
     final aiMsg = ChatMessage(text: '', isUser: false);
-    chatService.addMessage(updatedChat!.id, aiMsg);
+    chatService.addMessage(state.currentChat!.id, aiMsg);
 
-    updatedChat = chatService.getChat(updatedChat.id);
+    // إعادة تحميل الشات مرة واحدة بعد إضافة الرسايل
+    final updatedChat = chatService.getChat(state.currentChat!.id)!;
     emit(state.copyWith(currentChat: updatedChat));
 
-    // Streaming من AI
-    await for (var chunk in repo.grokStream(text)) {
-      aiMsg.text += chunk;
-      updatedChat = chatService.getChat(updatedChat!.id);
-      emit(state.copyWith(currentChat: updatedChat));
+    // 3. Streaming
+    try {
+      await for (var chunk in repo.grokStream(text)) {
+        aiMsg.text += chunk;
+
+        // بدل ما نروح للـ Hive كل مرة، نعدل الرسالة في الذاكرة بس ونحدّث الـ state
+        final messages = updatedChat.messages;
+        final aiIndex = messages.lastIndexWhere((m) => !m.isUser);
+        if (aiIndex != -1) {
+          messages[aiIndex] = aiMsg; // نعدل الرسالة في القايمة
+        }
+
+        emit(state.copyWith(
+          currentChat: updatedChat.copyWith(messages: messages),
+        ));
+      }
+    } catch (e) {
+      print("Error in stream: $e");
     }
 
-    // تحديث النسخة النهائية للرسالة
-    chatService.updateMessage(updatedChat!.id, aiMsg);
-    updatedChat = chatService.getChat(updatedChat.id);
-    emit(state.copyWith(currentChat: updatedChat, isLoading: false));
+    // تحديث نهائي في Hive (مرة واحدة بس في النهاية)
+    chatService.updateMessage(state.currentChat!.id, aiMsg);
+
+    emit(state.copyWith(isLoading: false));
   }
 
   // حذف شات
-  void deleteChat(String chatId) {
-    chatService.deleteChat(chatId);
+  void deleteCurrentAndStartNew() {
+    final currentId = state.currentChat?.id;
 
-    if (state.currentChat?.id == chatId) {
-      emit(state.copyWith(currentChat: null));
+    if (currentId != null) {
+      chatService.deleteChat(currentId);
+    }
+
+    // جلب كل الشاتات الموجودة بعد الحذف
+    final remainingChats = chatService.getAllChats();
+
+    if (remainingChats.isEmpty) {
+      // لو مفيش شات → امسح currentChat
+      emit(state.copyWith(currentChat: null, isLoading: false));
+    } else {
+      // لو فيه شات تاني → افتح أول واحد
+      emit(state.copyWith(currentChat: remainingChats.first, isLoading: false));
     }
   }
+
+
 
   // تعديل اسم الشات
   void updateChatTitle(String chatId, String newTitle) {
     chatService.updateChatTitle(chatId, newTitle);
+
     if (state.currentChat?.id == chatId) {
-      final updatedChat = chatService.getChat(chatId);
-      emit(state.copyWith(currentChat: updatedChat));
+      final updated = chatService.getChat(chatId);
+      emit(state.copyWith(currentChat: updated));
     }
   }
+
 }
 

@@ -6,6 +6,7 @@ import '../../features/home/data/models/chat_model.dart';
 
 class ChatService {
   final box = Hive.box<ChatModel>('chats');
+  String? lastOpenedChatId;
 
   // إنشاء شات جديد باسم مخصص
   String createNewChat({String? title}) {
