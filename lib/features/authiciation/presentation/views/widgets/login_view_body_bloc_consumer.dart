@@ -13,11 +13,12 @@ class LoginViewBodyBlocConsumer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInSuccess) {
           Navigator.pushNamed(context, MainView.routeName);
-          showSnackBar(context, 'Signed in successfully', Colors.green);
+          showSnackBar(context, 'Signed in successfully', theme.primaryColor);
         }
         if (state is SignInFailure) {
           showSnackBar(context, state.errorMessage, Colors.red);

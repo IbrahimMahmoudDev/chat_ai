@@ -25,21 +25,24 @@ class _MainViewBodyState extends State<MainViewBody> {
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: [
         Expanded(
           child: BlocBuilder<ChatCubit, ChatState>(
+
             builder: (context, state) {
+              final theme = Theme.of(context);
+              final isDark = theme.brightness == Brightness.dark;
               WidgetsBinding.instance.addPostFrameCallback((_) {
                 scrollToBottom();
               });
-
-              if (state.currentChat == null) {
-                return const Center(
-                  child: Text(
-                    "create New Chat ",
-                    style: TextStyle(fontSize: 16),
-                  ),
+              if (state.currentChat == null || state.currentChat!.messages.isEmpty) {
+                return  Center(
+                  child: Text(" Start a New Chat Conversation",style: TextStyle(
+                    fontSize: theme.textTheme.bodyLarge?.fontSize,
+                    color: isDark ? Colors.white : Colors.black,
+                  ),),
                 );
               }
               return Column(

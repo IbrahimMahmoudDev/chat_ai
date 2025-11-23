@@ -11,19 +11,27 @@ class ChatMessageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final userColor = isDark ? Colors.blue[700] : Colors.blue[400];
+    final userTextColor = Colors.white;
+
+    // ألوان الـ AI
+    final aiColor = isDark ? Colors.grey[800] : Colors.grey[300];
+    final aiTextColor = isDark ? Colors.white : Colors.black87;
     return Align(
       alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 6),
         padding: EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: isUser ?theme.colorScheme.primary :theme.colorScheme.secondary.withOpacity(1),
+          color: isUser ? userColor : aiColor,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Text(
           text,
           style: TextStyle(
-            color: isUser ? theme.colorScheme.onPrimary : theme.colorScheme.onSecondary,
+            color: isUser ? userTextColor : aiTextColor,
           ),
         ),
       ),

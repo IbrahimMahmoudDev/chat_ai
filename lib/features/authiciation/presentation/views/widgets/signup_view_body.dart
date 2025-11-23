@@ -15,6 +15,7 @@ class SignupViewBody extends StatefulWidget {
 }
 
 class _SignupViewBodyState extends State<SignupViewBody> {
+
   late String name, email, password;
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
@@ -30,8 +31,10 @@ class _SignupViewBodyState extends State<SignupViewBody> {
           autovalidateMode: autoValidateMode,
           child: Column(
             children: [
-              SizedBox(height: 50),
-            Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
+
+              Image.asset(
+                isDark ? Assets.imagesAiChat : Assets.imagesIconLogin,
+              ),
               SizedBox(height: 15),
               CustomTextFormFiled(
                 onSaved: (value) {
@@ -87,7 +90,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                     child: Text(
                       ' Login in',
                       style: AppTextStyles.regular14.copyWith(
-                        color: Colors.teal,
+                        color:theme.primaryColor,
                       ),
                     ),
                   ),

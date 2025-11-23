@@ -7,6 +7,7 @@ class Assets {
   static const String imagesIconLogin = 'assets/images/icon_login.jpg';
   static const String imagesIconNotification = 'assets/images/icon_notification.png';
   static const String imagesImageProfile = 'assets/images/image_profile.png';
-  static const String imagesSplashImages = 'assets/images/splash_images.jpg';
+  static const String imagesSplashImageDark = 'assets/images/splash_image_dark.jpg';
+  static const String imagesSplashImages = 'assets/images/splash_images_light.jpg';
 
 }

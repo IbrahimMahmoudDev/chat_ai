@@ -1,7 +1,5 @@
-// custom_drawer_widget.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/helper_function/get_user.dart';
 import '../../../data/models/chat_model.dart';
 import '../../manager/ConversationsCubit/conversations_cubit.dart';
 import '../../manager/chat_cubit/chat_cubit.dart';

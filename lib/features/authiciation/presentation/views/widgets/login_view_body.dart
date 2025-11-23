@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_ai/core/utils/app_style_text.dart';
 import 'package:chat_ai/core/widgets/custom_button.dart';
 import 'package:chat_ai/features/authiciation/presentation/views/widgets/custom_text_form_filed.dart';
@@ -33,8 +34,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
           autovalidateMode: autoValidateMode,
           child: Column(
             children: [
-              SizedBox(height: 80),
-              Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
+              SizedBox(height: 50),
+              Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin,),
               SizedBox(height: 15),
               CustomTextFormFiled(
                 onSaved: (value) {
@@ -57,7 +58,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                 alignment: Alignment.centerRight,
                 child: Text(
                   'Forget password ?',
-                  style: AppTextStyles.regular14.copyWith(color: Colors.teal),
+                  style: AppTextStyles.regular14.copyWith(color: theme.primaryColor),
                 ),
               ),
               SizedBox(height: 80),
@@ -87,7 +88,7 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                     child: Text(
                       ' Register now',
                       style: AppTextStyles.regular14.copyWith(
-                        color: Colors.teal,
+                        color: theme.primaryColor,
                       ),
                     ),
                   ),

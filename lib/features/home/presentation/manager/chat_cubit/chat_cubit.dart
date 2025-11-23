@@ -79,17 +79,18 @@ class ChatCubit extends Cubit<ChatState> {
       chatService.deleteChat(currentId);
     }
 
-    // جلب كل الشاتات الموجودة بعد الحذف
+    // بعد الحذف، nullify currentChat → لإفراغ الـ UI
+    emit(state.copyWith(currentChat: null, isLoading: false));
+
+    // جلب كل الشاتات الموجودة
     final remainingChats = chatService.getAllChats();
 
-    if (remainingChats.isEmpty) {
-      // لو مفيش شات → امسح currentChat
-      emit(state.copyWith(currentChat: null, isLoading: false));
-    } else {
+    if (remainingChats.isNotEmpty) {
       // لو فيه شات تاني → افتح أول واحد
       emit(state.copyWith(currentChat: remainingChats.first, isLoading: false));
     }
   }
+
 
 
 
