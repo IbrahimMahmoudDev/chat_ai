@@ -32,7 +32,7 @@ class OnBoardingViewBody extends StatelessWidget {
             text: 'Get Started',
           ),
 
-          SizedBox(height: 50),
+          SizedBox(height: 60),
         ],
       ),
     );

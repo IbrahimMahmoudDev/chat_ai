@@ -1,3 +1,4 @@
+import 'package:chat_ai/features/home/presentation/views/widgets/empty_chat_widget.dart';
 import 'package:chat_ai/features/home/presentation/views/widgets/text_form_field_chat.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,53 +19,49 @@ class _MainViewBodyState extends State<MainViewBody> {
 
   @override
   void dispose() {
-    super.dispose();
     controller.dispose();
     scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Column(
       children: [
         Expanded(
-          child: BlocBuilder<ChatCubit, ChatState>(
+          child: BlocListener<ChatCubit, ChatState>(
+            listenWhen: (previous, current) =>
+            previous.currentChat?.messages.length !=
+                current.currentChat?.messages.length,
+            listener: (_, __) => scrollToBottom(),
+            child: BlocBuilder<ChatCubit, ChatState>(
+              builder: (context, state) {
+                if (state.isEmptyChat) {
+                  return EmptyChatWidget();
+                }
 
-            builder: (context, state) {
-              final theme = Theme.of(context);
-              final isDark = theme.brightness == Brightness.dark;
-              WidgetsBinding.instance.addPostFrameCallback((_) {
-                scrollToBottom();
-              });
-              if (state.currentChat == null || state.currentChat!.messages.isEmpty) {
-                return  Center(
-                  child: Text(" Create a New Chat Conversation",style: TextStyle(
-                    fontSize: theme.textTheme.bodyLarge?.fontSize,
-                    color: isDark ? Colors.white : Colors.black,
-                  ),),
-                );
-              }
-              return Column(
-                children: [
-                  Expanded(
-                    child: ChatMessagesListView(
-                      controller: scrollController,
-                      messages:state.currentChat?.messages ?? [],
+                return Column(
+                  children: [
+                    Expanded(
+                      child: ChatMessagesListView(
+                        controller: scrollController,
+                        messages: state.currentChat!.messages,
+                      ),
                     ),
-                  ),
-
-                  if (state.isLoading) AiTypingIndicator(),
-                ],
-              );
-            },
+                    if (state.isLoading) const AiTypingIndicator(),
+                  ],
+                );
+              },
+            ),
           ),
         ),
-
         TextFormFieldChat(
           controller: controller,
           onFieldSubmitted: (value) {
-            context.read<ChatCubit>().sendMessage(value);
+            context.read<ChatCubit>().sendMessage(value,context);
             controller.clear();
           },
         ),
@@ -73,14 +70,18 @@ class _MainViewBodyState extends State<MainViewBody> {
   }
 
   void scrollToBottom() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (scrollController.hasClients) {
-        scrollController.animateTo(
-          scrollController.position.maxScrollExtent,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.easeOut,
-        );
-      }
-    });
+    if (!scrollController.hasClients) return;
+
+    scrollController.animateTo(
+      scrollController.position.maxScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
   }
+}
+
+// Extension لتسهيل التحقق من شات فارغ
+extension ChatStateExtension on ChatState {
+  bool get isEmptyChat =>
+      currentChat == null || currentChat!.messages.isEmpty;
 }

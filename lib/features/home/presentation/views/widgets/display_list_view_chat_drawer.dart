@@ -71,6 +71,7 @@ class DisplayListViewChatDrawer extends StatelessWidget {
             } else {
               // احذف شات غير الحالي
               conversationsCubit.deleteChat(chat.id);
+              conversationsCubit.loadAllChats();
             }
 
             Navigator.pop(context); // إغلاق الـ Drawer

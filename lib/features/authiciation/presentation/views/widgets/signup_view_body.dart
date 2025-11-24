@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/utils/app_style_text.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/assets.dart';
 import '../../manager/cubits/signup_cubit/signup_cubit.dart';
+import 'already_have_an_account.dart';
 import 'custom_password_field.dart';
 import 'custom_text_form_filed.dart';
 
@@ -15,7 +15,6 @@ class SignupViewBody extends StatefulWidget {
 }
 
 class _SignupViewBodyState extends State<SignupViewBody> {
-
   late String name, email, password;
   GlobalKey<FormState> formKey = GlobalKey();
   AutovalidateMode autoValidateMode = AutovalidateMode.disabled;
@@ -31,8 +30,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
           autovalidateMode: autoValidateMode,
           child: Column(
             children: [
-
-              Image.asset(
+                Image.asset(
                 isDark ? Assets.imagesAiChat : Assets.imagesIconLogin,
               ),
               SizedBox(height: 15),
@@ -60,7 +58,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 },
               ),
 
-              SizedBox(height: 90),
+              SizedBox(height: 60),
               CustomButton(
                 onPressed: () {
                   if (formKey.currentState!.validate()) {
@@ -78,24 +76,8 @@ class _SignupViewBodyState extends State<SignupViewBody> {
                 text: 'Sign up',
               ),
 
-              SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Already a member ?', style: AppTextStyles.regular14),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
-                    child: Text(
-                      ' Login in',
-                      style: AppTextStyles.regular14.copyWith(
-                        color:theme.primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            const  SizedBox(height: 15),
+              const AlreadyHaveAnAccount(),
             ],
           ),
         ),
@@ -103,3 +85,5 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     );
   }
 }
+
+

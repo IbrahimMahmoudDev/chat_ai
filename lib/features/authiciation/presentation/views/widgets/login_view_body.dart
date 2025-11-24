@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_ai/core/utils/app_style_text.dart';
 import 'package:chat_ai/core/widgets/custom_button.dart';
 import 'package:chat_ai/features/authiciation/presentation/views/widgets/custom_text_form_filed.dart';
+import 'package:chat_ai/features/authiciation/presentation/views/widgets/register_new_account.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,7 +12,7 @@ import '../signup_view.dart';
 import 'custom_password_field.dart';
 
 class LoginViewBody extends StatefulWidget {
-  const LoginViewBody({super.key});
+  const    LoginViewBody({super.key});
 
   @override
   State<LoginViewBody> createState() => _LoginViewBodyState();
@@ -56,12 +57,12 @@ class _LoginViewBodyState extends State<LoginViewBody> {
 
               Align(
                 alignment: Alignment.centerRight,
-                child: Text(
+                child:  Text(
                   'Forget password ?',
-                  style: AppTextStyles.regular14.copyWith(color: theme.primaryColor),
+                  style: AppTextStyles.regular14.copyWith(color: Colors.teal[400]),
                 ),
               ),
-              SizedBox(height: 80),
+              const SizedBox(height: 60),
               CustomButton(
                   onPressed: (){
                     if(formKey.currentState!.validate()){
@@ -76,24 +77,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
                   },
                   text: 'Login'),
 
-              SizedBox(height: 15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('New member ?', style: AppTextStyles.regular14),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.pushNamed(context, SignupView.routeName);
-                    },
-                    child: Text(
-                      ' Register now',
-                      style: AppTextStyles.regular14.copyWith(
-                        color: theme.primaryColor,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              const   SizedBox(height: 15),
+              const  RegisterNewAccount(),
             ],
           ),
         ),
@@ -101,3 +86,5 @@ class _LoginViewBodyState extends State<LoginViewBody> {
     );
   }
 }
+
+

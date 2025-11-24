@@ -6,6 +6,7 @@ import '../../features/home/domain/chat_repo.dart';
 import '../../secrets.dart';
 import 'chat_services.dart';
 import 'firebase_auth_services.dart';
+import 'netwok_services.dart';
 
 final getIt = GetIt.instance;
 
@@ -23,4 +24,7 @@ void setupServices() {
   );
 
   getIt.registerSingleton<ChatService>(ChatService());
+
+  getIt.registerSingleton<NetworkService>(NetworkService());
+
 }
