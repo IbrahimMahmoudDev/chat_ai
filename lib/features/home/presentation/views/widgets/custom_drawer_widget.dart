@@ -67,7 +67,7 @@ class CustomDrawerWidget extends StatelessWidget {
           const Divider(height: 30),
 
           // ==== Log Out ====
-          ActionLogOut(colorScheme: colorScheme, theme: theme),
+          ActionLogOut(),
         ],
       ),
     );

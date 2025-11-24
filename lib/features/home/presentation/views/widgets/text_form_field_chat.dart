@@ -40,6 +40,9 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
       padding: const EdgeInsets.all(16),
       child: TextFormField(
         controller: controller,
+        maxLines: null,
+        keyboardType: TextInputType.multiline,
+        textInputAction: TextInputAction.newline,
         onFieldSubmitted: widget.onFieldSubmitted,
         decoration: InputDecoration(
           filled: true,
@@ -57,11 +60,14 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
             color: theme.iconTheme.color,
           ),
 
-            suffixIcon: Icon(
-              Icons.send,
-              size: 25,
-              color: hasText ? theme.iconTheme.color : theme.disabledColor,
+            suffixIcon: IconButton(
+              icon: Icon(Icons.send, color: hasText ? theme.iconTheme.color : theme.disabledColor),
+              onPressed: hasText ? () {
+                widget.onFieldSubmitted?.call(controller.text);
+                controller.clear();
+              } : null,
             ),
+
         ),
       ),
     );
