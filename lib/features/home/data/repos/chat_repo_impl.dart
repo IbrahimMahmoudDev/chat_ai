@@ -19,7 +19,7 @@ class ChatRepoImpl implements ChatRepo {
     });
 
     request.body = jsonEncode({
-      "model": "groq/compound-mini",
+      "model": "openai/gpt-oss-120b", // الاسم الصحيح
       "messages": [
         {"role": "system", "content": "أنت مساعد ذكي وودود يرد بالعربية الفصحى أو العامية حسب الطلب."},
         {"role": "user", "content": message}
@@ -27,6 +27,7 @@ class ChatRepoImpl implements ChatRepo {
       "stream": true,
       "temperature": 0.7
     });
+
 
     var response = await request.send();
     print("Request sent, waiting for stream...");
