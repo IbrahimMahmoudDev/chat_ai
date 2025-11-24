@@ -15,9 +15,9 @@ class ConversationsCubit extends Cubit<List<ChatModel>> {
   }
 
   String createNewChat({String? title}) {
-    final id = chatService.createNewChat(title: title ?? 'New Chat');
+    ChatModel newChat = chatService.createNewChat(title: title ?? 'New Chat');
     loadAllChats();
-    return id;
+    return newChat.id;
   }
 
   void deleteChat(String chatId) {

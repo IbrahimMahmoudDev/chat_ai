@@ -9,13 +9,14 @@ class ChatService {
   String? lastOpenedChatId;
 
   // إنشاء شات جديد باسم مخصص
-  String createNewChat({String? title}) {
+  ChatModel createNewChat({String? title}) {
     final id = const Uuid().v4();
     final chatTitle = title ?? "New Chat";
     final chat = ChatModel(id: id, title: chatTitle, messages: []);
     box.put(id, chat);
-    return id;
+    return chat; // دلوقتي بترجع ChatModel بدل String
   }
+
 
   // إضافة رسالة
   void addMessage(String chatId, ChatMessage msg) {

@@ -41,6 +41,7 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
       child: TextFormField(
         controller: controller,
         maxLines: null,
+        autofocus: false,
         keyboardType: TextInputType.multiline,
         textInputAction: TextInputAction.newline,
         onFieldSubmitted: widget.onFieldSubmitted,
@@ -61,11 +62,18 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
           ),
 
             suffixIcon: IconButton(
-              icon: Icon(Icons.send, color: hasText ? theme.iconTheme.color : theme.disabledColor),
-              onPressed: hasText ? () {
-                widget.onFieldSubmitted?.call(controller.text);
-                controller.clear();
-              } : null,
+              icon: Icon(Icons.send),
+              onPressed: () {
+                // اخفي الكيبورد
+                FocusScope.of(context).unfocus();
+
+                // بعد كده نفّذ عملية الإرسال
+                final text = controller.text.trim();
+                if (text.isNotEmpty) {
+                  widget.onFieldSubmitted?.call(text);
+                  controller.clear();
+                }
+              },
             ),
 
         ),

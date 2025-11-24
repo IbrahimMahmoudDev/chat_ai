@@ -12,14 +12,23 @@ class CustomHomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return ListTile(
+      contentPadding: EdgeInsets.zero,
       // leading: Image.asset(Assets.imagesImageProfile),
       title: Text(
         "!.. ${getGreeting()}",
-        style: AppTextStyles.semibold16.copyWith(color: theme.textTheme.bodySmall?.color,),
+        style: AppTextStyles.semibold16.copyWith(
+          color: theme.brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
+        ),
       ),
       subtitle: Text(
         getUser().name,
-        style: AppTextStyles.bold16.copyWith(color: theme.textTheme.headlineMedium?.color),
+        style: AppTextStyles.bold16.copyWith(
+          color: theme.brightness == Brightness.dark
+              ? Colors.white
+              : Colors.black,
+        ),
       ),
       trailing: Image.asset(Assets.imagesImageProfile),
     );

@@ -10,6 +10,8 @@ class ChatState {
     required this.isLoading,
   });
 
+  List<ChatMessage> get messages => currentChat?.messages ?? [];
+
   ChatState copyWith({
     ChatModel? currentChat,
     bool? isLoading,

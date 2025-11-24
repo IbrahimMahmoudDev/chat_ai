@@ -29,7 +29,13 @@ class ChatCubit extends Cubit<ChatState> {
 
   // إرسال رسالة المستخدم + AI
   Future<void> sendMessage(String text, BuildContext context) async {
-    if (state.currentChat == null) return;
+    if (state.currentChat == null) {
+      final newChat = chatService.createNewChat(); // هترجع ChatModel دلوقتي
+      emit(state.copyWith(currentChat: newChat));
+    }
+
+    // 2️⃣ تفعيل الـ loading
+    emit(state.copyWith(isLoading: true));
 
     // 🔴 1) Check Internet FIRST
     final hasInternet = await getIt<NetworkService>().hasInternet();
