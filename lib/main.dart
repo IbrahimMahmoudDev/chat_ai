@@ -48,7 +48,7 @@ class ChatBotApp extends StatelessWidget {
           darkTheme: AppTheme.darkTheme,
           themeMode: state.themeMode,
           onGenerateRoute: onGenerateRoute,
-          initialRoute: SplashView.routeName,
+          initialRoute: MainView.routeName,
           debugShowCheckedModeBanner: false,
           title: 'ChatBotApp',
         );

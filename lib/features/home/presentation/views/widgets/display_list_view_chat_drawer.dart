@@ -28,6 +28,7 @@ class DisplayListViewChatDrawer extends StatelessWidget {
           overflow: TextOverflow.ellipsis,
         ),
         onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
           context.read<ChatCubit>().loadChat(chat.id);
           Navigator.pop(context);
         },

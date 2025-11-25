@@ -40,9 +40,11 @@ class ChatCubit extends Cubit<ChatState> {
     // 🔴 1) Check Internet FIRST
     final hasInternet = await getIt<NetworkService>().hasInternet();
     if (!hasInternet) {
-      showSnackBar(context,
-          "Please check your network and try again.",
-          Colors.red);
+      showSnackBar(
+        context,
+        "Please check your network and try again.",
+        Colors.red,
+      );
       return; // ← stop here
     }
 
@@ -67,8 +69,9 @@ class ChatCubit extends Cubit<ChatState> {
         final aiIndex = messages.lastIndexWhere((m) => !m.isUser);
         if (aiIndex != -1) messages[aiIndex] = aiMsg;
 
-        emit(state.copyWith(
-            currentChat: updatedChat.copyWith(messages: messages)));
+        emit(
+          state.copyWith(currentChat: updatedChat.copyWith(messages: messages)),
+        );
       }
     } catch (e) {
       // 🔴 لو حصل Error في منتصف ال-stream → Snackbar فقط
@@ -83,7 +86,6 @@ class ChatCubit extends Cubit<ChatState> {
 
     emit(state.copyWith(isLoading: false));
   }
-
 
   // حذف شات
   void deleteCurrentAndStartNew() {

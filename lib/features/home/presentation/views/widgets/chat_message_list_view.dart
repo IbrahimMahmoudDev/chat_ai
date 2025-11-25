@@ -17,6 +17,8 @@ class ChatMessagesListView extends StatelessWidget {
   Widget build(BuildContext context) {
     final chatMessages = messages ?? [];
     final theme = Theme.of(context);
+
+
     if (chatMessages.isEmpty) {
       return Center(
         child: Text(

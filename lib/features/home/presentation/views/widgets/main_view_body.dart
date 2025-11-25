@@ -32,37 +32,32 @@ class _MainViewBodyState extends State<MainViewBody> {
     return Column(
       children: [
         Expanded(
-          child: BlocListener<ChatCubit, ChatState>(
-            listenWhen: (previous, current) =>
-            previous.currentChat?.messages.length !=
-                current.currentChat?.messages.length,
-            listener: (_, __) => scrollToBottom(),
-            child: BlocBuilder<ChatCubit, ChatState>(
-              builder: (context, state) {
-                if (state.isEmptyChat) {
-                  return EmptyChatWidget();
-                }
+          child: BlocBuilder<ChatCubit, ChatState>(
+            builder: (context, state) {
+              if (state.isEmptyChat) {
+                return EmptyChatWidget();
+              }
 
-                return Column(
-                  children: [
-                    Expanded(
-                      child: ChatMessagesListView(
-                        controller: scrollController,
-                        messages: state.currentChat!.messages,
-                      ),
+              return Column(
+                children: [
+                  Expanded(
+                    child: ChatMessagesListView(
+                      controller: scrollController,
+                      messages: state.currentChat!.messages,
                     ),
-                    if (state.isLoading) const AiTypingIndicator(),
-                  ],
-                );
-              },
-            ),
+                  ),
+                  if (state.isLoading) const AiTypingIndicator(),
+                ],
+              );
+            },
           ),
         ),
         TextFormFieldChat(
           controller: controller,
           onFieldSubmitted: (value) {
-            context.read<ChatCubit>().sendMessage(value,context);
+            context.read<ChatCubit>().sendMessage(value, context);
             controller.clear();
+            scrollToBottom();
           },
         ),
       ],
@@ -70,18 +65,15 @@ class _MainViewBodyState extends State<MainViewBody> {
   }
 
   void scrollToBottom() {
-    if (!scrollController.hasClients) return;
-
-    scrollController.animateTo(
-      scrollController.position.maxScrollExtent,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeOut,
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (scrollController.hasClients) {
+        scrollController.jumpTo(scrollController.position.maxScrollExtent);
+      }
+    });
   }
 }
 
 // Extension لتسهيل التحقق من شات فارغ
 extension ChatStateExtension on ChatState {
-  bool get isEmptyChat =>
-      currentChat == null || currentChat!.messages.isEmpty;
+  bool get isEmptyChat => currentChat == null || currentChat!.messages.isEmpty;
 }

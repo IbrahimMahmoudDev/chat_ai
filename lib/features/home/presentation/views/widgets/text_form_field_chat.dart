@@ -26,7 +26,6 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
   @override
   void dispose() {
     if (widget.controller == null) {
-
       controller.dispose();
     }
     super.dispose();
@@ -51,7 +50,6 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(14)),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(14),
-
           ),
           hintText: 'Ask me anything...',
           hintStyle: AppTextStyles.regular16.copyWith(color: theme.hintColor),
@@ -61,21 +59,27 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
             color: theme.iconTheme.color,
           ),
 
-            suffixIcon: IconButton(
-              icon: Icon(Icons.send),
-              onPressed: () {
-                // اخفي الكيبورد
-                FocusScope.of(context).unfocus();
-
-                // بعد كده نفّذ عملية الإرسال
-                final text = controller.text.trim();
-                if (text.isNotEmpty) {
-                  widget.onFieldSubmitted?.call(text);
-                  controller.clear();
-                }
-              },
+          suffixIcon: IconButton(
+            icon: Icon(
+              Icons.send,
+              color: hasText
+                  ? Colors
+                        .white // اللون لما يكون في كتابة
+                  : theme.disabledColor, // اللون وهو disabled
             ),
+            onPressed: hasText
+                ? () {
+                    FocusScope.of(context).unfocus();
 
+                    // بعد كده نفّذ عملية الإرسال
+                    final text = controller.text.trim();
+                    if (text.isNotEmpty) {
+                      widget.onFieldSubmitted?.call(text);
+                      controller.clear();
+                    }
+                  }
+                : null,
+          ),
         ),
       ),
     );

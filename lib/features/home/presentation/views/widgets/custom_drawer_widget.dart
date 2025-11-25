@@ -35,33 +35,36 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
 
           // ==== قايمة المحادثات (بتتحدث تلقائي بفضل BlocBuilder) ====
-        Expanded(
-          child: BlocBuilder<ConversationsCubit, List<ChatModel>>(
-            builder: (context, chats) {
-              if (chats.isEmpty) {
-                return const Center(child: Text("No Chats Here"));
-              }
+          Expanded(
+            child: BlocBuilder<ConversationsCubit, List<ChatModel>>(
+              builder: (context, chats) {
+                if (chats.isEmpty) {
+                  return const Center(child: Text("No Chats Here"));
+                }
 
-              // حساب currentChatId مرة واحدة
-              final currentChatId = context.read<ChatCubit>().state.currentChat?.id;
+                // حساب currentChatId مرة واحدة
+                final currentChatId = context
+                    .read<ChatCubit>()
+                    .state
+                    .currentChat
+                    ?.id;
 
-              return ListView.builder(
-                itemCount: chats.length,
-                itemBuilder: (context, index) {
-                  final chat = chats[index];
-                  final isCurrent = currentChatId == chat.id; // مقارنة مباشرة
+                return ListView.builder(
+                  itemCount: chats.length,
+                  itemBuilder: (context, index) {
+                    final chat = chats[index];
+                    final isCurrent = currentChatId == chat.id; // مقارنة مباشرة
 
-                  return DisplayListViewChatDrawer(
-                    isCurrent: isCurrent,
-                    colorScheme: colorScheme,
-                    chat: chat,
-                  );
-                },
-              );
-            },
+                    return DisplayListViewChatDrawer(
+                      isCurrent: isCurrent,
+                      colorScheme: colorScheme,
+                      chat: chat,
+                    );
+                  },
+                );
+              },
+            ),
           ),
-        ),
-
 
           // ==== زر محادثة جديدة ====
           NewChatButton(isDark: isDark),
