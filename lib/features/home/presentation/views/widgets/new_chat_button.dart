@@ -5,15 +5,16 @@ import '../../manager/ConversationsCubit/conversations_cubit.dart';
 import '../../manager/chat_cubit/chat_cubit.dart';
 
 class NewChatButton extends StatelessWidget {
-  const NewChatButton({
-    super.key,
-    required this.isDark,
-  });
-
-  final bool isDark;
+  const NewChatButton({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    final iconColor = isDark ? Colors.white : Colors.black;
+    final textColor = iconColor;
+    final backgroundColor = isDark ? Colors.grey[850] : Colors.teal[100];
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: ElevatedButton.icon(
@@ -22,12 +23,10 @@ class NewChatButton extends StatelessWidget {
           context.read<ChatCubit>().loadChat(newId);
           Navigator.pop(context);
         },
-        icon:  Icon(Icons.add,color: isDark ? Colors.white : Colors.black,),
-        label:  Text("New Chat",style: TextStyle(
-          color: isDark ? Colors.white : Colors.black,
-        ),),
+        icon: Icon(Icons.add, color: iconColor),
+        label: Text("New Chat", style: TextStyle(color: textColor)),
         style: ElevatedButton.styleFrom(
-          backgroundColor: isDark ? Colors.black.withOpacity(1) : Colors.teal[100],
+          backgroundColor: backgroundColor,
           minimumSize: const Size(double.infinity, 50),
         ),
       ),

@@ -63,9 +63,12 @@ class _TextFormFieldChatState extends State<TextFormFieldChat> {
             icon: Icon(
               Icons.send,
               color: hasText
-                  ? Colors
-                        .white // اللون لما يكون في كتابة
-                  : theme.disabledColor, // اللون وهو disabled
+                  ? (Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black) // اللون لما يكون في كتابة
+                  : (Theme.of(context).brightness == Brightness.dark
+                  ? Colors.grey[600]
+                  : Colors.grey[500]), // اللون وهو disabled
             ),
             onPressed: hasText
                 ? () {

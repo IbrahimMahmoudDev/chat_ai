@@ -27,8 +27,6 @@ class _MainViewBodyState extends State<MainViewBody> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final isDark = theme.brightness == Brightness.dark;
-
     return Column(
       children: [
         Expanded(

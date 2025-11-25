@@ -19,7 +19,7 @@ class EmptyChatWidget extends StatelessWidget {
           Icon(Icons.chat_bubble_outline,
               size: 80, color: isDark ? Colors.white54 : Colors.black54),
           const SizedBox(height: 20),
-          Text(
+           Text(
             "No Messages Yet",
             style: theme.textTheme.titleMedium,
           ),

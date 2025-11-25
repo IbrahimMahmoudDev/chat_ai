@@ -67,7 +67,7 @@ class CustomDrawerWidget extends StatelessWidget {
           ),
 
           // ==== زر محادثة جديدة ====
-          NewChatButton(isDark: isDark),
+          NewChatButton(),
 
           const Divider(height: 30),
 

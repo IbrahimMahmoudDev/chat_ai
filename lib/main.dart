@@ -41,16 +41,23 @@ class ChatBotApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeCubit = context.read<ThemeCubit>();
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
-        return MaterialApp(
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: state.themeMode,
-          onGenerateRoute: onGenerateRoute,
-          initialRoute: MainView.routeName,
-          debugShowCheckedModeBanner: false,
-          title: 'ChatBotApp',
+        return AnimatedTheme(
+          data: state.themeMode == ThemeMode.light
+              ? AppTheme.lightTheme
+              : AppTheme.darkTheme,
+          duration: const Duration(milliseconds: 100),
+          child: MaterialApp(
+            theme: AppTheme.lightTheme,
+            darkTheme: AppTheme.darkTheme,
+            themeMode: state.themeMode,
+            onGenerateRoute: onGenerateRoute,
+            initialRoute: MainView.routeName,
+            debugShowCheckedModeBanner: false,
+            title: 'ChatBotApp',
+          ),
         );
       },
     );

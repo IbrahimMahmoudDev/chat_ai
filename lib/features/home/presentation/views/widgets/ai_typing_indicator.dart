@@ -18,9 +18,9 @@ class AiTypingIndicator extends StatelessWidget {
           child: Row(
             children: [
               dot(),
-              SizedBox(width: 4),
+            const  SizedBox(width: 4),
               dot(),
-              SizedBox(width: 4),
+             const SizedBox(width: 4),
               dot(),
             ],
           ),

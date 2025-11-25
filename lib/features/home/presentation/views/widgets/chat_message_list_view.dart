@@ -18,12 +18,13 @@ class ChatMessagesListView extends StatelessWidget {
     final chatMessages = messages ?? [];
     final theme = Theme.of(context);
 
-
     if (chatMessages.isEmpty) {
       return Center(
         child: Text(
           "No messages yet",
-          style: theme.textTheme.bodyMedium?.copyWith(color: theme.disabledColor),
+          style: theme.textTheme.bodyMedium?.copyWith(
+            color: theme.disabledColor,
+          ),
         ),
       );
     }
@@ -35,10 +36,7 @@ class ChatMessagesListView extends StatelessWidget {
       itemCount: chatMessages.length,
       itemBuilder: (context, index) {
         final msg = chatMessages[index];
-        return ChatMessageBubble(
-          text: msg.text,
-          isUser: msg.isUser,
-        );
+        return ChatMessageBubble(text: msg.text, isUser: msg.isUser);
       },
     );
   }
