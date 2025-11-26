@@ -16,7 +16,7 @@ class OnBoardingViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Spacer(),
-          Image.asset(isDark ? Assets.imagesSplashImageDark : Assets.imagesSplashImages),
+          Image.asset(isDark ? Assets.imagesAiDark1 : Assets.imagesAiLight1,width: double.infinity,),
           SizedBox(height: 30),
           Text('Chat with AI Anytime Anywhere', style:theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
           SizedBox(height: 10),
