@@ -25,65 +25,65 @@ class _SignupViewBodyState extends State<SignupViewBody> {
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Form(
-          key: formKey,
-          autovalidateMode: autoValidateMode,
-          child: Column(
-            children: [
-                Image.asset(
-                isDark ? Assets.imagesAiChat : Assets.imagesIconLogin,
-              ),
-              SizedBox(height: 15),
-              CustomTextFormFiled(
-                onSaved: (value) {
-                  name = value!;
-                },
-                iconSuffix: Icon(Icons.person, color: Colors.grey),
-                textInputType: TextInputType.text,
-                hintText: 'Name',
-              ),
-              SizedBox(height: 24),
-              CustomTextFormFiled(
-                onSaved: (value) {
-                  email = value!;
-                },
-                iconSuffix: Icon(Icons.email, color: Colors.grey),
-                textInputType: TextInputType.emailAddress,
-                hintText: 'Email',
-              ),
-              SizedBox(height: 24),
-              PasswordField(
-                onSaved: (value) {
-                  password = value!;
-                },
-              ),
+        child: buildForm(isDark, context),
+      ),
+    );
+  }
 
-              SizedBox(height: 60),
-              CustomButton(
-                onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    context.read<SignupCubit>().createUserWithEmailAndPassword(
-                      email,
-                      password,
-                      name,
-                    );
-                  } else {
-                    autoValidateMode = AutovalidateMode.always;
-                    setState(() {});
-                  }
-                },
-                text: 'Sign up',
-              ),
-
-            const  SizedBox(height: 15),
-              const AlreadyHaveAnAccount(),
-            ],
+  Form buildForm(bool isDark, BuildContext context) {
+    return Form(
+      key: formKey,
+      autovalidateMode: autoValidateMode,
+      child: Column(
+        children: [
+          Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
+          SizedBox(height: 15),
+          CustomTextFormFiled(
+            onSaved: (value) {
+              name = value!;
+            },
+            iconSuffix: Icon(Icons.person, color: Colors.grey),
+            textInputType: TextInputType.text,
+            hintText: 'Name',
           ),
-        ),
+          SizedBox(height: 24),
+          CustomTextFormFiled(
+            onSaved: (value) {
+              email = value!;
+            },
+            iconSuffix: Icon(Icons.email, color: Colors.grey),
+            textInputType: TextInputType.emailAddress,
+            hintText: 'Email',
+          ),
+          SizedBox(height: 24),
+          PasswordField(
+            onSaved: (value) {
+              password = value!;
+            },
+          ),
+
+          SizedBox(height: 60),
+          CustomButton(
+            onPressed: () {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                context.read<SignupCubit>().createUserWithEmailAndPassword(
+                  email,
+                  password,
+                  name,
+                );
+              } else {
+                autoValidateMode = AutovalidateMode.always;
+                setState(() {});
+              }
+            },
+            text: 'Sign up',
+          ),
+
+          const SizedBox(height: 15),
+          const AlreadyHaveAnAccount(),
+        ],
       ),
     );
   }
 }
-
-

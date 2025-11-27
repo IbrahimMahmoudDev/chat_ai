@@ -1,7 +1,5 @@
 import 'package:chat_ai/core/services/git_it_services.dart';
 import 'package:chat_ai/features/authiciation/presentation/views/login_view.dart';
-import 'package:chat_ai/features/home/presentation/views/main_view.dart';
-import 'package:chat_ai/features/on_boarding_screen/presentation/views/on_board_view.dart';
 import 'package:chat_ai/features/splash_view/presentation/views/splash_view.dart';
 import 'package:chat_ai/simple_block_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -56,7 +54,7 @@ class ChatBotApp extends StatelessWidget {
             darkTheme: AppTheme.darkTheme,
             themeMode: state.themeMode,
             onGenerateRoute: onGenerateRoute,
-            initialRoute: LoginView.routeName,
+            initialRoute: SplashView.routeName,
             debugShowCheckedModeBanner: false,
             title: 'ChatBotApp',
           ),

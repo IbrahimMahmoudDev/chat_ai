@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../../../core/services/shared_prefrence_singleton.dart';
+import '../../../../../../core/utils/constant.dart';
 import '../../../../domain/entites/user_entity.dart';
 import '../../../../domain/repo/auth_repo.dart';
 part 'signup_state.dart';
@@ -21,7 +23,10 @@ class SignupCubit extends Cubit<SignupState> {
     );
     result.fold(
       (failure) => emit(SignupFailure(errorMessage: failure.errorMessage)),
-      (userEntity) => emit(SignupSuccess(userEntity: userEntity)),
+      (userEntity) {
+        Prefs.setBool(kOnBoardingSeen, false);
+        emit(SignupSuccess(userEntity: userEntity));
+      }
     );
   }
 }

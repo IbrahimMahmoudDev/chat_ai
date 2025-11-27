@@ -1,5 +1,7 @@
 import 'package:chat_ai/features/home/presentation/views/main_view.dart';
 import 'package:flutter/material.dart';
+import '../../../../../core/services/shared_prefrence_singleton.dart';
+import '../../../../../core/utils/constant.dart';
 import '../../../../../core/widgets/custom_button.dart';
 import '../../../../../generated/assets.dart';
 
@@ -16,9 +18,17 @@ class OnBoardingViewBody extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Spacer(),
-          Image.asset(isDark ? Assets.imagesAiDark1 : Assets.imagesAiLight1,width: double.infinity,),
+          Image.asset(
+            isDark ? Assets.imagesAiDark1 : Assets.imagesAiLight1,
+            width: double.infinity,
+          ),
           SizedBox(height: 30),
-          Text('Chat with AI Anytime Anywhere', style:theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w600)),
+          Text(
+            'Chat with AI Anytime Anywhere',
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           SizedBox(height: 10),
           Text(
             'Instant,smart answers powered by advanced artificial intelligence',
@@ -27,12 +37,16 @@ class OnBoardingViewBody extends StatelessWidget {
           ),
           Spacer(),
           CustomButton(
+            onPressed: () {
+              Prefs.setBool(kOnBoardingSeen, true);
+              Navigator.pushReplacementNamed(context, MainView.routeName);
+            },
             targetPage: const MainView(),
 
             text: 'Get Started',
           ),
 
-          const  SizedBox(height: 60),
+          const SizedBox(height: 60),
         ],
       ),
     );

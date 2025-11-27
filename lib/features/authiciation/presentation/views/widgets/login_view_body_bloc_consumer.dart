@@ -3,6 +3,8 @@ import 'package:chat_ai/features/on_boarding_screen/presentation/views/on_board_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../../core/services/shared_prefrence_singleton.dart';
+import '../../../../../core/utils/constant.dart';
 import '../../../../../core/widgets/custom_progress_hud.dart';
 import '../../../../home/presentation/views/main_view.dart';
 import '../../manager/cubits/signin_cubit/sign_in_cubit.dart';
@@ -18,8 +20,15 @@ class LoginViewBodyBlocConsumer extends StatelessWidget {
     return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInSuccess) {
-          Navigator.pushNamed(context, OnBoardView.routeName);
-          showSnackBar(context, 'Signed in successfully',Colors.green);
+          final onboardingSeen = Prefs.getBool(kOnBoardingSeen) ?? false;
+
+          if (!onboardingSeen) {
+            Navigator.pushReplacementNamed(context, OnBoardView.routeName);
+          } else {
+            Navigator.pushReplacementNamed(context, MainView.routeName);
+          }
+
+          showSnackBar(context, 'Signed in successfully', Colors.green);
         }
         if (state is SignInFailure) {
           showSnackBar(context, state.errorMessage, Colors.red);
