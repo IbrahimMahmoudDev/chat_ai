@@ -1,5 +1,5 @@
 import 'package:chat_ai/core/services/git_it_services.dart';
-import 'package:chat_ai/features/authiciation/presentation/views/login_view.dart';
+import 'package:chat_ai/core/utils/constant.dart';
 import 'package:chat_ai/features/splash_view/presentation/views/splash_view.dart';
 import 'package:chat_ai/simple_block_observer.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,11 +20,9 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Hive.initFlutter();
-
   Hive.registerAdapter(ChatMessageAdapter());
   Hive.registerAdapter(ChatModelAdapter());
-
-  await Hive.openBox<ChatModel>('chats');
+  await Hive.openBox<ChatModel>(kChatBox);
   Bloc.observer = SimpleBlocObserver();
   await Prefs.init();
   setupServices();
