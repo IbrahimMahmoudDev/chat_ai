@@ -34,6 +34,18 @@ class ChatCubit extends Cubit<ChatState> {
       emit(state.copyWith(currentChat: newChat));
     }
 
+    final currentChat = state.currentChat!;
+
+    // إذا العنوان مازال "New Chat"، حدّثه بأول رسالة المستخدم
+    if (currentChat.title == "New Chat") {
+      final newTitle = text.length > 20 ? '${text.substring(0, 20)}...' : text;
+      chatService.updateChatTitle(currentChat.id, newTitle);
+
+      // تحديث الـ state
+      final updatedChat = chatService.getChat(currentChat.id)!;
+      emit(state.copyWith(currentChat: updatedChat));
+    }
+
     // 2️⃣ تفعيل الـ loading
     emit(state.copyWith(isLoading: true));
 
