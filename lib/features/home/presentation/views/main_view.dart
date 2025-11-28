@@ -7,8 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/services/chat_services.dart';
 import '../../domain/chat_repo.dart';
-import '../manager/ConversationsCubit/conversations_cubit.dart';
 import '../manager/chat_cubit/chat_cubit.dart';
+import '../manager/conversations_cubit/conversations_cubit.dart';
 
 class MainView extends StatelessWidget {
   const MainView({super.key});

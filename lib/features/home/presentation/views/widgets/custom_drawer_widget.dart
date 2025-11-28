@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../data/models/chat_model.dart';
-import '../../manager/ConversationsCubit/conversations_cubit.dart';
 import '../../manager/chat_cubit/chat_cubit.dart';
+import '../../manager/conversations_cubit/conversations_cubit.dart';
 import 'action_logout.dart';
 import 'dark_theme_list_tile.dart';
 import 'display_list_view_chat_drawer.dart';
@@ -42,29 +42,29 @@ class CustomDrawerWidget extends StatelessWidget {
                   return const Center(child: Text("No Chats Here"));
                 }
 
-                // حساب currentChatId مرة واحدة
-                final currentChatId = context
-                    .read<ChatCubit>()
-                    .state
-                    .currentChat
-                    ?.id;
+                return BlocBuilder<ChatCubit, ChatState>(
+                  builder: (context, chatState) {
+                    final currentChatId = chatState.currentChat?.id;
 
-                return ListView.builder(
-                  itemCount: chats.length,
-                  itemBuilder: (context, index) {
-                    final chat = chats[index];
-                    final isCurrent = currentChatId == chat.id; // مقارنة مباشرة
+                    return ListView.builder(
+                      itemCount: chats.length,
+                      itemBuilder: (context, index) {
+                        final chat = chats[index];
+                        final isCurrent = currentChatId == chat.id;
 
-                    return DisplayListViewChatDrawer(
-                      isCurrent: isCurrent,
-                      colorScheme: colorScheme,
-                      chat: chat,
+                        return DisplayListViewChatDrawer(
+                          isCurrent: isCurrent,
+                          colorScheme: Theme.of(context).colorScheme,
+                          chat: chat,
+                        );
+                      },
                     );
                   },
                 );
               },
             ),
-          ),
+          )
+          ,
 
           // ==== زر محادثة جديدة ====
           NewChatButton(),

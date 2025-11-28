@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../manager/ConversationsCubit/conversations_cubit.dart';
 import '../../manager/chat_cubit/chat_cubit.dart';
+import '../../manager/conversations_cubit/conversations_cubit.dart';
 
 class NewChatButton extends StatelessWidget {
   const NewChatButton({super.key});

@@ -12,7 +12,12 @@ class ChatService {
   ChatModel createNewChat({String? title}) {
     final id = const Uuid().v4();
     final chatTitle = title ?? "New Chat";
-    final chat = ChatModel(id: id, title: chatTitle, messages: []);
+    final chat = ChatModel(
+        id: id,
+        title: chatTitle,
+        messages: [],
+        createdAt: DateTime.now()
+    );
     box.put(id, chat);
     return chat; // دلوقتي بترجع ChatModel بدل String
   }

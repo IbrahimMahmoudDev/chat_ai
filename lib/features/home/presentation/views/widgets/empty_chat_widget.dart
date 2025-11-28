@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../../manager/ConversationsCubit/conversations_cubit.dart';
 import '../../manager/chat_cubit/chat_cubit.dart';
+import '../../manager/conversations_cubit/conversations_cubit.dart';
 
 class EmptyChatWidget extends StatelessWidget {
   const EmptyChatWidget({super.key});
@@ -29,15 +28,15 @@ class EmptyChatWidget extends StatelessWidget {
             textAlign: TextAlign.center,
             style: theme.textTheme.bodyMedium,
           ),
-          const SizedBox(height: 20),
-          ElevatedButton.icon(
-            onPressed: () {
-              final chatId = context.read<ConversationsCubit>().createNewChat();
-              context.read<ChatCubit>().loadChat(chatId);
-            },
-            icon: const Icon(Icons.add),
-            label: const Text("New Chat"),
-          ),
+          // const SizedBox(height: 20),
+          // ElevatedButton.icon(
+          //   onPressed: () {
+          //     final chatId = context.read<ConversationsCubit>().createNewChat();
+          //     context.read<ChatCubit>().loadChat(chatId);
+          //   },
+          //   icon: const Icon(Icons.add),
+          //   label: const Text("New Chat"),
+          // ),
         ],
       ),
     );

@@ -16,10 +16,11 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
     return BlocProvider(
       create: (context) => SignInCubit(getIt.get<AuthRepo>()),
       child: Scaffold(
-        backgroundColor:Colors.white,
+        backgroundColor:isDark ? theme.scaffoldBackgroundColor : Colors.white,
         body: LoginViewBodyBlocConsumer(),
       ),
     );

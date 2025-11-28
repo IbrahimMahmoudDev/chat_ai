@@ -8,6 +8,7 @@ import '../../../../../core/services/netwok_services.dart';
 import '../../../data/models/chat_message.dart';
 import '../../../data/models/chat_model.dart';
 import '../../../domain/chat_repo.dart';
+import '../conversations_cubit/conversations_cubit.dart';
 
 part 'chat_state.dart';
 
@@ -30,8 +31,15 @@ class ChatCubit extends Cubit<ChatState> {
   // إرسال رسالة المستخدم + AI
   Future<void> sendMessage(String text, BuildContext context) async {
     if (state.currentChat == null) {
-      final newChat = chatService.createNewChat(); // هترجع ChatModel دلوقتي
+      // 1️⃣ إنشاء محادثة جديدة في ConversationsCubit (عشان تظهر في drawer)
+      final newChatId = context.read<ConversationsCubit>().createNewChat();
+
+      // 2️⃣ جلبها من ChatService وتحميلها في ChatCubit
+      final newChat = chatService.getChat(newChatId)!;
       emit(state.copyWith(currentChat: newChat));
+
+      // 3️⃣ تخزين آخر محادثة مفتوحة
+      chatService.lastOpenedChatId = newChatId;
     }
 
     final currentChat = state.currentChat!;

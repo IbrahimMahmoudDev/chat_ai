@@ -14,11 +14,16 @@ class ChatModel {
   @HiveField(2)
   List<ChatMessage> messages;
 
+  @HiveField(3)
+  final DateTime createdAt;
+
   ChatModel({
     required this.id,
     required this.title,
     required this.messages,
-  });
+    DateTime? createdAt,
+  }) : createdAt = createdAt ?? DateTime.now();
+
   ChatModel copyWith({
     String? id,
     String? title,
@@ -28,7 +33,7 @@ class ChatModel {
       id: id ?? this.id,
       title: title ?? this.title,
       messages: messages ?? this.messages,
+      createdAt: createdAt,
     );
   }
-
 }

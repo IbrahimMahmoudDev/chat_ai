@@ -11,7 +11,9 @@ class ConversationsCubit extends Cubit<List<ChatModel>> {
   }
 
   void loadAllChats() {
-    emit(chatService.getAllChats());
+    final chats = chatService.getAllChats();
+    chats.sort((a, b) => b.createdAt.compareTo(a.createdAt)); // الأحدث فوق
+    emit(chats);
   }
 
   String createNewChat({String? title}) {

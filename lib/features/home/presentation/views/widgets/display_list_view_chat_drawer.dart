@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/models/chat_model.dart';
-import '../../manager/ConversationsCubit/conversations_cubit.dart';
 import '../../manager/chat_cubit/chat_cubit.dart';
+import '../../manager/conversations_cubit/conversations_cubit.dart';
 
 class DisplayListViewChatDrawer extends StatelessWidget {
   const DisplayListViewChatDrawer({
@@ -63,14 +63,10 @@ class DisplayListViewChatDrawer extends StatelessWidget {
           onPressed: () {
             final chatCubit = context.read<ChatCubit>();
             final conversationsCubit = context.read<ConversationsCubit>();
-
             if (isCurrent) {
-              // احذف الشات الحالي
               chatCubit.deleteCurrentAndStartNew();
-              // حدّث قائمة المحادثات في Drawer
               conversationsCubit.loadAllChats();
             } else {
-              // احذف شات غير الحالي
               conversationsCubit.deleteChat(chat.id);
               conversationsCubit.loadAllChats();
             }
