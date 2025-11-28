@@ -2,6 +2,11 @@ part of 'theme_cubit.dart';
 
 @immutable
 class ThemeState {
-  final ThemeMode themeMode;
- const ThemeState(this.themeMode);
+  final ThemeData themeData;
+  final bool isDark;
+
+  const ThemeState({
+    required this.themeData,
+    required this.isDark,
+  });
 }

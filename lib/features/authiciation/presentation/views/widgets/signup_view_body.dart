@@ -36,6 +36,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
       autovalidateMode: autoValidateMode,
       child: Column(
         children: [
+          SizedBox(height: isDark ? 30 : 50),
           Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
           SizedBox(height: 15),
           CustomTextFormFiled(

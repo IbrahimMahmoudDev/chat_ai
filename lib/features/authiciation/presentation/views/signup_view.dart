@@ -21,7 +21,7 @@ class SignupView extends StatelessWidget {
             getIt.get<AuthRepo>(),
           ),
       child: Scaffold(
-        backgroundColor: theme.scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         body: SignupViewBodyBlocConsumer(),
       ),
     );

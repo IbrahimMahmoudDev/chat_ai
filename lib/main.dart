@@ -8,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'core/helper_function/on_generate_route.dart';
 import 'core/services/shared_prefrence_singleton.dart';
-import 'core/utils/app_theme.dart';
 import 'features/home/data/models/chat_message.dart';
 import 'features/home/data/models/chat_model.dart';
 import 'features/home/presentation/manager/theme_cubit/theme_cubit.dart';
@@ -16,9 +15,7 @@ import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await Hive.initFlutter();
   Hive.registerAdapter(ChatMessageAdapter());
   Hive.registerAdapter(ChatModelAdapter());
@@ -26,12 +23,8 @@ Future<void> main() async {
   Bloc.observer = SimpleBlocObserver();
   await Prefs.init();
   setupServices();
-  final themeCubit = ThemeCubit();
-  runApp(BlocProvider<ThemeCubit>.value(
-    value: themeCubit,
-    // create: (context) => ThemeCubit(),
-    child: ChatBotApp(),
-  ));
+
+  runApp(BlocProvider(create: (_) => ThemeCubit(), child: const ChatBotApp()));
 }
 
 class ChatBotApp extends StatelessWidget {
@@ -39,25 +32,26 @@ class ChatBotApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeCubit = context.read<ThemeCubit>();
     return BlocBuilder<ThemeCubit, ThemeState>(
       builder: (context, state) {
-        return AnimatedTheme(
-          data: state.themeMode == ThemeMode.light
-              ? AppTheme.lightTheme
-              : AppTheme.darkTheme,
-          duration: const Duration(milliseconds: 100),
-          child: MaterialApp(
-            theme: AppTheme.lightTheme,
-            darkTheme: AppTheme.darkTheme,
-            themeMode: state.themeMode,
-            onGenerateRoute: onGenerateRoute,
-            initialRoute: SplashView.routeName,
-            debugShowCheckedModeBanner: false,
-            title: 'ChatBotApp',
-          ),
-        );
+        return AppView(themeData: state.themeData);
       },
+    );
+  }
+}
+
+class AppView extends StatelessWidget {
+  const AppView({super.key, required this.themeData});
+  final ThemeData themeData;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: themeData,
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: onGenerateRoute,
+      initialRoute: SplashView.routeName,
+      title: 'ChatBotApp',
     );
   }
 }

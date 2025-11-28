@@ -21,7 +21,7 @@ class DarkThemeListTile extends StatelessWidget {
       trailing: BlocBuilder<ThemeCubit, ThemeState>(
         builder: (context, state) {
           return Switch(
-            value: state.themeMode == ThemeMode.dark,
+            value: context.watch<ThemeCubit>().state.isDark,
             activeColor: colorScheme.primary,
             onChanged: (_) => context.read<ThemeCubit>().toggleTheme(),
           );

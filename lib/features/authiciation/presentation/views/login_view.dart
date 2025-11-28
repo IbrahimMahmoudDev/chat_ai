@@ -19,7 +19,7 @@ class LoginView extends StatelessWidget {
     return BlocProvider(
       create: (context) => SignInCubit(getIt.get<AuthRepo>()),
       child: Scaffold(
-        backgroundColor: theme.scaffoldBackgroundColor,
+        backgroundColor:Colors.white,
         body: LoginViewBodyBlocConsumer(),
       ),
     );
