@@ -37,7 +37,7 @@ class _SignupViewBodyState extends State<SignupViewBody> {
       child: Column(
         children: [
           SizedBox(height: isDark ? 30 : 50),
-          Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
+          Image.asset(isDark ? Assets.imagesImagesChatAppGeminiDark1 : Assets.imagesChatAppGeminiLight),
           SizedBox(height: 15),
           CustomTextFormFiled(
             onSaved: (value) {

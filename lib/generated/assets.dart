@@ -6,9 +6,13 @@ class Assets {
   static const String imagesAiDark1 = 'assets/images/ai_dark1.png';
   static const String imagesAiLight1 = 'assets/images/ai_light1.png';
   static const String imagesAppLogo = 'assets/images/app_logo.png';
+  static const String imagesChatAppGeminiLight = 'assets/images/chat_app_gemini_light.jpg';
+  static const String imagesChatSplash = 'assets/images/chat_splash.jpg';
   static const String imagesIconLogin = 'assets/images/icon_login.jpg';
   static const String imagesIconNotification = 'assets/images/icon_notification.png';
   static const String imagesImageProfile = 'assets/images/image_profile.png';
+  static const String imagesImagesChatAppGeminiDark1 = 'assets/images/imagesChatAppGeminiDark1.jpg';
+  static const String imagesImagesChatAppGeminiDark2 = 'assets/images/imagesChatAppGeminiDark2.jpg';
   static const String imagesSplashImageDark = 'assets/images/splash_image_dark.jpg';
   static const String imagesSplashImagesLight = 'assets/images/splash_images_light.jpg';
 

@@ -12,6 +12,7 @@ class OnBoardingViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: Column(
@@ -19,7 +20,7 @@ class OnBoardingViewBody extends StatelessWidget {
         children: [
           Spacer(),
           Image.asset(
-            isDark ? Assets.imagesAiDark1 : Assets.imagesAiLight1,
+            isDark ? Assets.imagesChatSplash : Assets.imagesChatSplash,
             width: double.infinity,
           ),
           SizedBox(height: 30),
@@ -31,7 +32,7 @@ class OnBoardingViewBody extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Text(
-            'Instant,smart answers powered by advanced artificial intelligence',
+            'Instant smart answers powered by advanced artificial intelligence',
             textAlign: TextAlign.center,
             style: theme.textTheme.titleSmall?.copyWith(color: theme.hintColor),
           ),

@@ -38,8 +38,8 @@ class _LoginViewBodyState extends State<LoginViewBody> {
       autovalidateMode: autoValidateMode,
       child: Column(
         children: [
-          SizedBox(height: isDark ? 30 : 80),
-          Image.asset(isDark ? Assets.imagesAiChat : Assets.imagesIconLogin),
+          SizedBox(height: 80),
+          Image.asset(isDark ? Assets.imagesImagesChatAppGeminiDark1 : Assets.imagesChatAppGeminiLight),
           SizedBox(height: 15),
           CustomTextFormFiled(
             onSaved: (value) {
